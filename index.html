@@ -76,6 +76,7 @@ body{
 .notebook{
   width:min(360px, 78vw);
   aspect-ratio:3/4.3;
+  touch-action:manipulation;
   background:linear-gradient(160deg, #1a1414, #0f0c0c 60%);
   border:1px solid #2c2222;
   border-radius:4px;
@@ -246,6 +247,41 @@ body{
 }
 .feedback.yellow{ color:#ffd84a; text-shadow:0 0 8px rgba(255,216,74,0.15); }
 
+/* ---------- BLACKOUT ---------- */
+#scene-blackout{ background:#000; }
+.blackout-text{
+  color:var(--paper);
+  font-family:'Shippori Mincho', serif;
+  font-size:clamp(1.1rem, 3.5vw, 1.5rem);
+  max-width:500px;
+  line-height:1.7;
+}
+
+/* ---------- RESPOSTA LIVRE ---------- */
+.text-answer{
+  width:100%;
+  background:var(--black-2);
+  border:1px solid #2c2c31;
+  color:var(--paper);
+  font-family:'EB Garamond', serif;
+  font-size:1.05rem;
+  padding:0.85rem 1.2rem;
+  border-radius:6px;
+  outline:none;
+  transition:border-color 0.25s ease;
+}
+.text-answer:focus{ border-color:var(--teal-bright); }
+.submit-answer{ text-align:center; }
+
+/* ---------- GIF DE RECOMPENSA ---------- */
+#scene-gif{ background:#000; padding:0; }
+.reward-gif{
+  max-width:90vw;
+  max-height:80vh;
+  border-radius:8px;
+  box-shadow:0 30px 80px -20px rgba(0,0,0,0.9);
+}
+
 /* ---------- REVEAL ---------- */
 .reveal-eyebrow{ color:var(--blood-bright); }
 .reveal-title{
@@ -336,7 +372,7 @@ footer.hint{
 
 <!-- SCENE 1: COVER -->
 <section class="scene active" id="scene-cover">
-  <div class="notebook" onclick="openNotebook()">
+  <div class="notebook" id="notebook">
     <div class="title display">DEATH NOTE</div>
     <div class="sub">este caderno pertence apenas a quem<br>souber decifrar seu conteúdo.</div>
     <div class="music-label">--Ryuk--<br>(Minha musica favorita de Death Note, a sua fodase.)</div>
@@ -356,16 +392,26 @@ footer.hint{
       <li>Apos responder o quiz com exatidão, você se tornara digna do uso.</li>
     </ul>
   </div>
-  <div class="page-turn" onclick="goTo('quiz')">virar a página →</div>
+  <div class="page-turn" onclick="startQuiz()">virar a página →</div>
 </section>
 
 <!-- SCENE 3: QUIZ -->
 <section class="scene quiz-card" id="scene-quiz">
-  <div class="eyebrow q-eyebrow" id="quiz-eyebrow">Desafio 1 de 3 — Respiração da Memória</div>
+  <div class="eyebrow q-eyebrow" id="quiz-eyebrow">Julgamento do Caderno</div>
   <div class="progress-wrap"><div class="progress-bar" id="progress"></div></div>
   <div class="question" id="quiz-question"></div>
   <div class="options" id="quiz-options"></div>
   <div class="feedback" id="quiz-feedback"></div>
+</section>
+
+<!-- SCENE 3B: BLACKOUT -->
+<section class="scene" id="scene-blackout">
+  <div class="blackout-text" id="blackout-text"></div>
+</section>
+
+<!-- SCENE 3C: GIF DE RECOMPENSA -->
+<section class="scene" id="scene-gif">
+  <img class="reward-gif" src="reward.gif" alt="">
 </section>
 
 <!-- SCENE 4: REVEAL -->
@@ -431,7 +477,7 @@ readIP();
 /* QUIZ */
 const quizData = [
   {
-    eyebrow: "Desafio 1 de 3 — Respiração da Memória",
+    eyebrow: "Julgamento do Caderno",
     question: "Como o Felipe e a Rafaella se conheceram?",
     options: [
       "Ela respondeu um story dele elogiando a roupa",
@@ -446,7 +492,7 @@ const quizData = [
     }
   },
   {
-    eyebrow: "Desafio 2 de 3 — Julgamento do Caderno",
+    eyebrow: "Julgamento do Caderno",
     question: "Qual é o apelido oficial e definitivo da Rafaella?",
     options: [
       "Muichiro Tokito",
@@ -461,7 +507,7 @@ const quizData = [
     }
   },
   {
-    eyebrow: "Desafio 3 de 3 — Escolha do Nome no Caderno",
+    eyebrow: "Julgamento do Caderno",
     question: "Qual é o anime favorito dos dois?",
     options: [
       "Attack on Titan",
@@ -474,6 +520,38 @@ const quizData = [
       0: "De gigante já basta o meu.",
       1: "Não tenho trocadilho pra isso então sei la."
     }
+  },
+  {
+    eyebrow: "Julgamento do Caderno",
+    question: "Quanto é 8 x 7?",
+    options: ["54", "56", "58"],
+    correct: 1,
+    instantAdvance: true,
+    feedback: "Perdão, tipo de pergunta errada."
+  },
+  {
+    eyebrow: "Julgamento do Caderno",
+    question: "Quantos filhos nós teremos?",
+    freeText: true,
+    correctNumber: 2,
+    feedback: "Isso. Dois é o número certo.",
+    underFeedback: "Errou. Tenta de novo, lerdona.",
+    overFeedback: "Eita papai, ixtourei."
+  },
+  {
+    eyebrow: "Julgamento do Caderno",
+    question: "Qual o MEU Death Note?",
+    options: [
+      "Death Note normal ué",
+      "Plug Note",
+      "Incesto Note"
+    ],
+    correct: 1,
+    feedback: "Isso mesmo. Plug Note.",
+    wrongFeedbacks: {
+      0: "Usa seu cérebro pelo menos uma vez.",
+      2: "Linha de pensamento quase correta, bom trabalho."
+    }
   }
 ];
 
@@ -482,14 +560,54 @@ let qIndex = 0;
 function goTo(id){
   document.querySelectorAll('.scene').forEach(s => s.classList.remove('active'));
   document.getElementById('scene-' + id).classList.add('active');
-  if(id === 'quiz'){ qIndex = 0; quizCompleted = false; renderQuestion(); }
   if(id === 'final'){ finishQuiz(); }
 }
 
+function startQuiz(){
+  qIndex = 0;
+  quizCompleted = false;
+  goTo('quiz');
+  renderQuestion();
+}
+
+function showReward(){
+  goTo('gif');
+  setTimeout(() => {
+    goTo('reveal');
+  }, 4000);
+}
+
+function showBlackout(text){
+  document.getElementById('blackout-text').textContent = text;
+  goTo('blackout');
+  setTimeout(() => {
+    qIndex++;
+    if(qIndex < quizData.length){
+      goTo('quiz');
+      renderQuestion();
+    } else {
+      quizCompleted = true;
+      localStorage.setItem('quizCompleted', 'true');
+      localStorage.setItem('quizCompletedAt', new Date().toISOString());
+      showReward();
+    }
+  }, 5000);
+}
+
+let notebookOpened = false;
 function openNotebook(){
+  if(notebookOpened) return;
+  notebookOpened = true;
   playTheme();
   goTo('rules');
 }
+
+const notebookEl = document.getElementById('notebook');
+notebookEl.addEventListener('click', openNotebook);
+notebookEl.addEventListener('touchend', function(e){
+  e.preventDefault();
+  openNotebook();
+}, {passive:false});
 
 function renderQuestion(){
   const data = quizData[qIndex];
@@ -503,6 +621,27 @@ function renderQuestion(){
 
   const optsWrap = document.getElementById('quiz-options');
   optsWrap.innerHTML = '';
+
+  if(data.freeText){
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.className = 'text-answer';
+    input.placeholder = 'Escreva sua resposta...';
+    input.id = 'freeTextInput';
+
+    const submitBtn = document.createElement('button');
+    submitBtn.className = 'opt submit-answer';
+    submitBtn.textContent = 'Responder';
+
+    const submit = () => submitFreeText(input.value, submitBtn, input);
+    submitBtn.onclick = submit;
+    input.addEventListener('keydown', (e) => { if(e.key === 'Enter'){ submit(); } });
+
+    optsWrap.appendChild(input);
+    optsWrap.appendChild(submitBtn);
+    return;
+  }
+
   data.options.forEach((opt, i) => {
     const btn = document.createElement('button');
     btn.className = 'opt';
@@ -512,16 +651,61 @@ function renderQuestion(){
   });
 }
 
+function submitFreeText(rawValue, btnEl, inputEl){
+  const data = quizData[qIndex];
+  const feedback = document.getElementById('quiz-feedback');
+  const value = rawValue.trim();
+  const num = parseInt(value, 10);
+
+  if(isNaN(num)){
+    feedback.classList.remove('yellow');
+    feedback.textContent = "Isso não é um número válido, tenta de novo.";
+    return;
+  }
+
+  if(num !== data.correctNumber){
+    feedback.classList.remove('yellow');
+    feedback.textContent = num > data.correctNumber ? data.overFeedback : data.underFeedback;
+    return;
+  }
+
+  inputEl.disabled = true;
+  btnEl.disabled = true;
+  btnEl.style.pointerEvents = 'none';
+  feedback.classList.remove('yellow');
+  feedback.textContent = data.feedback;
+  document.getElementById('progress').style.width = ((qIndex+1)/quizData.length*100) + '%';
+
+  setTimeout(() => {
+    qIndex++;
+    if(qIndex < quizData.length){
+      renderQuestion();
+    } else {
+      quizCompleted = true;
+      localStorage.setItem('quizCompleted', 'true');
+      localStorage.setItem('quizCompletedAt', new Date().toISOString());
+      showReward();
+    }
+  }, 1400);
+}
+
 function selectAnswer(i, btnEl){
   const data = quizData[qIndex];
   const feedback = document.getElementById('quiz-feedback');
+
+  if(data.instantAdvance){
+    document.querySelectorAll('.opt').forEach(b => b.style.pointerEvents = 'none');
+    btnEl.classList.add(i === data.correct ? 'correct' : 'wrong');
+    showBlackout(data.feedback);
+    return;
+  }
 
   if(i !== data.correct){
     btnEl.classList.add('wrong');
     btnEl.style.pointerEvents = 'none';
     if(data.wrongFeedbacks && data.wrongFeedbacks[i]){
       feedback.innerHTML = data.wrongFeedbacks[i];
-      if(qIndex === 0 || qIndex === 2){ feedback.classList.add('yellow'); }
+      if(qIndex === 0 || qIndex === 2 || qIndex === 5){ feedback.classList.add('yellow'); }
     } else {
       feedback.textContent = "Errou. Que surpresa. Tenta de novo, lerdona.";
     }
@@ -542,7 +726,7 @@ function selectAnswer(i, btnEl){
       quizCompleted = true;
       localStorage.setItem('quizCompleted', 'true');
       localStorage.setItem('quizCompletedAt', new Date().toISOString());
-      goTo('reveal');
+      showReward();
     }
   }, 1400);
 }
@@ -555,54 +739,4 @@ function finishQuiz(){
   if(visitorIP !== 'Não identificado'){
     ipDisplay.innerHTML = 'IP registrado nesta sessão: <strong>' + visitorIP + '</strong>';
   } else {
-    ipDisplay.textContent = 'Quiz concluído. IP não pôde ser identificado.';
-  }
-}
-
-/* BOTÃO "DEIXA EU PENSAR" — FOGE */
-const noBtn = document.getElementById('btn-no');
-const btnRow = noBtn.parentElement;
-let dodges = 0;
-let noPos = {x:0, y:0};
-
-noBtn.style.position = 'relative';
-noBtn.style.left = '0px';
-noBtn.style.top = '0px';
-
-function randomDodgeTarget(){
-  const margin = 20;
-  const w = noBtn.offsetWidth;
-  const spanX = Math.max(window.innerWidth - w - margin*2, 200);
-  const spanY = Math.max(window.innerHeight * 0.5, 160);
-  const targetX = (Math.random() - 0.5) * spanX;
-  const targetY = (Math.random() - 0.5) * spanY;
-  return {x: targetX, y: targetY};
-}
-
-function dodge(){
-  noPos = randomDodgeTarget();
-  noBtn.style.transform = `translate(${noPos.x}px, ${noPos.y}px)`;
-  dodges++;
-  if(dodges === 3){ noBtn.textContent = "para de tentar"; }
-  else if(dodges === 8){ noBtn.textContent = "sério, desiste"; }
-  else if(dodges > 14){ noBtn.textContent = "😤"; }
-}
-
-function distToBtn(clientX, clientY){
-  const rect = noBtn.getBoundingClientRect();
-  const cx = rect.left + rect.width/2;
-  const cy = rect.top + rect.height/2;
-  return Math.hypot(clientX - cx, clientY - cy);
-}
-
-document.addEventListener('mousemove', (e) => {
-  if(!document.getElementById('scene-reveal').classList.contains('active')) return;
-  if(distToBtn(e.clientX, e.clientY) < 110){ dodge(); }
-});
-
-noBtn.addEventListener('touchstart', function(e){ e.preventDefault(); dodge(); }, {passive:false});
-noBtn.addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation(); dodge(); });
-</script>
-
-</body>
-</html>
+    ipDisplay.textContent = 'Quiz concluído. IP não pôde
