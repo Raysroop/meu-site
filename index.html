@@ -512,7 +512,20 @@ opacity:1;
 }
 }
 
-</style> </head> <body> <!-- ========================================================= MÚSICA ========================================================= --> <audio id="themeMusic" loop preload="auto"> <source src="ryuk.mp3" type="audio/mpeg"> </audio> <!-- ========================================================= SCENE 0: COVER ========================================================= --> <section class="scene active" id="scene-cover"> <div class="notebook" onclick="openNotebook()" >
+</style> </head> <body> <!-- ========================================================= MÚSICA DO RYUK ========================================================= -->
+<audio
+id="themeMusic"
+loop
+preload="auto"
+
+<source
+src="./ryuk.mp3"
+type="audio/mpeg"
+
+Seu navegador não suporta áudio.
+</audio>
+
+<!-- ========================================================= SCENE 0: COVER ========================================================= --> <section class="scene active" id="scene-cover" > <div class="notebook" onclick="openNotebook()" >
 <div class="title display">
   DEATH NOTE
 </div>
@@ -527,7 +540,7 @@ opacity:1;
   (Minha musica favorita de Death Note, a sua fodase.)
 </div>
 
-</div> </section> <!-- ========================================================= SCENE 1: RULES ========================================================= --> <section class="scene" id="scene-rules"> <div class="rules-card">
+</div> </section> <!-- ========================================================= SCENE 1: RULES ========================================================= --> <section class="scene" id="scene-rules" > <div class="rules-card">
 <div class="eyebrow">
   Regras do Caderno
 </div>
@@ -587,7 +600,16 @@ MÚSICA
 const themeMusic =
 document.getElementById('themeMusic');
 
+/*
+Tenta iniciar a música assim que o site
+termina de carregar.
+*/
+
 function playTheme(){
+
+if(!themeMusic){
+return;
+}
 
 themeMusic.volume = 0.55;
 
@@ -598,7 +620,12 @@ if(promise !== undefined){
 
 promise.catch(() => {
 
-  // Navegador bloqueou autoplay.
+  /*
+    O navegador pode bloquear autoplay.
+
+    Nesse caso, o primeiro clique/toque
+    do usuário iniciará a música.
+  */
 
 });
 
@@ -606,18 +633,52 @@ promise.catch(() => {
 
 }
 
-document.addEventListener(
-'click',
+/*
+Tenta tocar assim que a página carrega.
+*/
+
+window.addEventListener(
+'load',
 function(){
+
+playTheme();
+
+}
+);
+
+/*
+Caso o navegador bloqueie autoplay,
+qualquer primeira interação do usuário
+inicia a música.
+
+Depois que a música começar, os listeners
+continuam funcionando sem problema.
+*/
+
+function startMusicOnInteraction(){
 
 if(themeMusic.paused){
 
-  playTheme();
+playTheme();
 
 }
 
-},
-{once:false}
+}
+
+document.addEventListener(
+'click',
+startMusicOnInteraction
+);
+
+document.addEventListener(
+'touchstart',
+startMusicOnInteraction,
+{passive:true}
+);
+
+document.addEventListener(
+'keydown',
+startMusicOnInteraction
 );
 
 /* =========================================================
@@ -958,11 +1019,10 @@ setTimeout(
   }else{
 
     /*
-      Terminou o quiz.
+      Quiz terminou.
 
-      Agora vai diretamente para
-      a tela "Pronto para iniciar
-      o desafio?"
+      Vai diretamente para:
+      "Pronto para iniciar o desafio?"
     */
 
     goTo('start');
@@ -983,8 +1043,8 @@ INICIAR DESAFIO
 function startChallenge(){
 
 /*
-Por enquanto, o botão simplesmente
-leva para uma tela totalmente preta.
+Por enquanto, o botão leva
+para uma tela completamente preta.
 */
 
 document
@@ -998,13 +1058,12 @@ document
 .getElementById('scene-black')
 .classList.add('active');
 
-/*
-Garante que o fundo inteiro da página
-também fique preto.
-*/
-
 document.body.style.background =
 '#000';
+
+/*
+Mantém a música tocando por enquanto.
+*/
 
 }
 
