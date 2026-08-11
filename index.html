@@ -1,122 +1,174 @@
-<!DOCTYPE html> <html lang="pt-BR"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Death Note</title> <style> @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=EB+Garamond:ital,wght@0,400;0,600;1,500&family=Shippori+Mincho:wght@500;800&display=swap');
+<!DOCTYPE html> <html lang="pt-BR"> <head> <meta charset="UTF-8">
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+
+<title>Death Note</title> <style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=EB+Garamond:ital,wght@0,400;0,600;1,500&family=Shippori+Mincho:wght@500;800&display=swap');
+
 :root{
+
 --black:#0a0a0c;
+
 --black-2:#131215;
+
 --paper:#ede3c8;
+
 --paper-dim:#ddd0ab;
+
 --blood:#a61c1c;
+
 --blood-bright:#d1372f;
+
 --teal:#1f6f5c;
+
 --teal-bright:#2f9c81;
+
 --gold:#c9a227;
+
 --ink:#1c1a16;
+
 }
 
 *{
+
 box-sizing:border-box;
+
 margin:0;
+
 padding:0;
+
 }
 
 html,
 body{
-height:100%;
-background:var(--black);
+
+width:100%;
+
+min-height:100%;
+
+background:#0a0a0c;
+
 color:var(--paper);
+
 font-family:'EB Garamond',serif;
-overflow-x:hidden;
+
 }
 
 body{
+
 min-height:100vh;
 
-background:
-radial-gradient(
-ellipse at 50% -10%,
-rgba(166,28,28,0.12),
-transparent 60%
-),
-radial-gradient(
-ellipse at 50% 110%,
-rgba(31,111,92,0.10),
-transparent 60%
-),
-var(--black);
-}
+overflow-x:hidden;
 
-.eyebrow{
-font-family:'Shippori Mincho',serif;
-font-weight:800;
-letter-spacing:0.35em;
-text-transform:uppercase;
-font-size:0.7rem;
-color:var(--gold);
-}
-
-.display{
-font-family:'Cinzel Decorative',serif;
-font-weight:900;
-line-height:1.1;
 }
 
 .scene{
-display:none;
 
-min-height:100vh;
 width:100%;
 
+min-height:100vh;
+
+display:none;
+
 align-items:center;
+
 justify-content:center;
+
 flex-direction:column;
 
 padding:6vh 6vw;
 
 text-align:center;
 
-animation:fadeIn 0.9s ease both;
 }
 
 .scene.active{
+
 display:flex;
+
 }
 
-@keyframes fadeIn{
-from{
-opacity:0;
-transform:translateY(14px);
+.display{
+
+font-family:'Cinzel Decorative',serif;
+
+font-weight:900;
+
+line-height:1.1;
+
 }
 
-to{
-opacity:1;
-transform:translateY(0);
-}
+.eyebrow{
+
+font-family:'Shippori Mincho',serif;
+
+font-weight:800;
+
+letter-spacing:0.35em;
+
+text-transform:uppercase;
+
+font-size:0.7rem;
+
+color:var(--gold);
+
 }
 
 /* =========================================================
-COVER
+CAPA
 ========================================================= */
 
+#scene-cover{
+
+background:
+
+radial-gradient(
+  ellipse at 50% -10%,
+  rgba(166,28,28,0.12),
+  transparent 60%
+),
+
+radial-gradient(
+  ellipse at 50% 110%,
+  rgba(31,111,92,0.10),
+  transparent 60%
+),
+
+#0a0a0c;
+
+}
+
 .notebook{
+
 width:min(360px,78vw);
+
 aspect-ratio:3/4.3;
 
 background:
+
 linear-gradient(
-160deg,
-#1a1414,
-#0f0c0c 60%
+  160deg,
+  #1a1414,
+  #0f0c0c 60%
 );
 
 border:1px solid #2c2222;
+
 border-radius:4px;
 
 box-shadow:
+
 0 40px 80px -20px rgba(0,0,0,0.8),
+
 inset 0 0 60px rgba(166,28,28,0.06);
 
 display:flex;
+
 flex-direction:column;
+
 align-items:center;
+
 justify-content:center;
 
 gap:1.2rem;
@@ -124,65 +176,110 @@ gap:1.2rem;
 cursor:pointer;
 
 transition:
+
 transform 0.4s ease,
+
 box-shadow 0.4s ease;
 
 position:relative;
+
 }
 
 .notebook::before{
+
 content:"";
 
 position:absolute;
+
 inset:14px;
 
 border:1px solid rgba(166,28,28,0.35);
+
 }
 
 .notebook:hover{
-transform:translateY(-4px) scale(1.01);
+
+transform:
+
+translateY(-4px)
+scale(1.01);
 
 box-shadow:
+
 0 50px 90px -20px rgba(166,28,28,0.25),
+
 inset 0 0 60px rgba(166,28,28,0.1);
+
 }
 
 .notebook .title{
+
 font-size:clamp(2rem,6vw,2.6rem);
+
 color:var(--blood-bright);
+
 letter-spacing:0.06em;
+
 }
 
 .notebook .sub{
+
 font-family:'Shippori Mincho',serif;
+
 color:var(--paper-dim);
+
 font-size:0.95rem;
+
 letter-spacing:0.08em;
+
 line-height:1.6;
+
 max-width:280px;
+
 }
 
 .music-label{
+
 margin-top:0.4rem;
 
 color:var(--gold);
 
 font-family:'EB Garamond',serif;
+
 font-style:italic;
+
 font-size:0.9rem;
+
 line-height:1.4;
 
 max-width:290px;
+
 }
 
 /* =========================================================
-RULES
+REGRAS
 ========================================================= */
 
+#scene-rules{
+
+background:
+
+radial-gradient(
+  ellipse at 50% -10%,
+  rgba(166,28,28,0.12),
+  transparent 60%
+),
+
+#0a0a0c;
+
+}
+
 .rules-card{
+
 max-width:560px;
 
 background:var(--paper);
+
 color:var(--ink);
 
 border-radius:2px;
@@ -190,30 +287,39 @@ border-radius:2px;
 padding:2.6rem 2.2rem;
 
 box-shadow:
+
 0 30px 70px -25px rgba(0,0,0,0.7);
 
 text-align:left;
 
-position:relative;
 }
 
 .rules-card h2{
+
 font-family:'Cinzel Decorative',serif;
+
 color:var(--blood);
+
 font-size:1.5rem;
+
 margin-bottom:0.3rem;
+
 }
 
 .rules-card .eyebrow{
+
 color:var(--blood);
+
 }
 
 .rules-list{
+
 margin-top:1.4rem;
 
 list-style:none;
 
 display:flex;
+
 flex-direction:column;
 
 gap:0.9rem;
@@ -221,17 +327,21 @@ gap:0.9rem;
 font-size:1.05rem;
 
 counter-reset:rule;
+
 }
 
 .rules-list li{
+
 padding-left:2rem;
 
 position:relative;
 
 line-height:1.5;
+
 }
 
 .rules-list li::before{
+
 content:counter(rule);
 
 counter-increment:rule;
@@ -239,15 +349,19 @@ counter-increment:rule;
 position:absolute;
 
 left:0;
+
 top:0;
 
 font-family:'Cinzel Decorative';
+
 font-weight:900;
 
 color:var(--blood);
+
 }
 
 .page-turn{
+
 margin-top:2rem;
 
 cursor:pointer;
@@ -255,30 +369,55 @@ cursor:pointer;
 color:var(--gold);
 
 letter-spacing:0.2em;
+
 text-transform:uppercase;
 
 font-size:0.75rem;
 
 animation:pulse 1.8s infinite ease-in-out;
+
 }
 
 @keyframes pulse{
+
 50%{
+
 opacity:0.35;
+
 }
+
 }
 
 /* =========================================================
 QUIZ
 ========================================================= */
 
+#scene-quiz{
+
+background:
+
+radial-gradient(
+  ellipse at 50% -10%,
+  rgba(31,111,92,0.08),
+  transparent 60%
+),
+
+#0a0a0c;
+
+}
+
 .quiz-card{
+
 max-width:560px;
+
 width:100%;
+
 }
 
 .progress-wrap{
+
 width:100%;
+
 max-width:420px;
 
 height:10px;
@@ -292,48 +431,63 @@ overflow:hidden;
 margin:1.6rem auto 2.2rem;
 
 border:1px solid #2c2c31;
+
 }
 
 .progress-bar{
+
 height:100%;
+
 width:0%;
 
 background:
+
 linear-gradient(
-90deg,
-var(--teal),
-var(--gold)
+  90deg,
+  var(--teal),
+  var(--gold)
 );
 
 transition:width 0.6s ease;
 
 box-shadow:
+
 0 0 14px var(--teal-bright);
+
 }
 
 .q-eyebrow{
+
 color:var(--teal-bright);
+
 }
 
 .question{
+
 font-size:clamp(1.2rem,3.2vw,1.6rem);
 
 margin:0.6rem 0 1.8rem;
 
 color:var(--paper);
+
 }
 
 .options{
+
 display:flex;
+
 flex-direction:column;
 
 gap:0.8rem;
 
 width:100%;
+
 max-width:420px;
+
 }
 
 .opt{
+
 background:var(--black-2);
 
 border:1px solid #2c2c31;
@@ -341,6 +495,7 @@ border:1px solid #2c2c31;
 color:var(--paper);
 
 font-family:'EB Garamond',serif;
+
 font-size:1.05rem;
 
 padding:0.85rem 1.2rem;
@@ -352,25 +507,31 @@ cursor:pointer;
 transition:all 0.25s ease;
 
 text-align:left;
+
 }
 
 .opt:hover{
+
 border-color:var(--teal-bright);
 
 background:#171a19;
 
 transform:translateX(4px);
+
 }
 
 .opt.correct{
+
 border-color:var(--teal-bright);
 
 background:#123028;
 
 color:var(--teal-bright);
+
 }
 
 .opt.wrong{
+
 border-color:var(--blood-bright);
 
 background:#2a1414;
@@ -378,61 +539,89 @@ background:#2a1414;
 color:var(--blood-bright);
 
 animation:shake 0.35s ease;
+
 }
 
 @keyframes shake{
+
 25%{
+
 transform:translateX(-5px);
+
 }
 
 75%{
+
 transform:translateX(5px);
+
 }
+
 }
 
 .feedback{
+
 margin-top:1.6rem;
 
 min-height:2.8rem;
 
 font-family:'Shippori Mincho',serif;
+
 font-size:0.95rem;
 
 color:var(--gold);
 
 line-height:1.5;
+
 }
 
 .feedback.yellow{
+
 color:#ffd84a;
 
 text-shadow:
+
 0 0 8px rgba(255,216,74,0.15);
+
 }
 
 /* =========================================================
-TELA "INICIAR DESAFIO"
+INICIAR DESAFIO
 ========================================================= */
 
+#scene-start{
+
+background:#0a0a0c;
+
+}
+
 .start-challenge{
+
 max-width:650px;
+
 width:100%;
+
 }
 
 .start-eyebrow{
+
 color:var(--blood-bright);
+
 margin-bottom:1rem;
+
 }
 
 .start-title{
+
 font-size:clamp(2rem,7vw,3.5rem);
 
 color:var(--paper);
 
 margin-bottom:1.2rem;
+
 }
 
 .start-sub{
+
 color:var(--paper-dim);
 
 font-size:1.1rem;
@@ -442,24 +631,29 @@ line-height:1.6;
 max-width:500px;
 
 margin:0 auto 2.5rem;
+
 }
 
 .start-button{
+
 padding:1rem 2.8rem;
 
 border:none;
+
 border-radius:7px;
 
 background:
+
 linear-gradient(
-135deg,
-var(--teal-bright),
-var(--teal)
+  135deg,
+  var(--teal-bright),
+  var(--teal)
 );
 
 color:#0a0a0c;
 
 font-family:'Shippori Mincho',serif;
+
 font-weight:800;
 
 letter-spacing:0.08em;
@@ -469,50 +663,43 @@ font-size:1rem;
 cursor:pointer;
 
 box-shadow:
+
 0 10px 30px -8px rgba(47,156,129,0.6);
 
 transition:
+
 transform 0.2s ease,
+
 box-shadow 0.2s ease;
+
 }
 
 .start-button:hover{
-transform:translateY(-3px) scale(1.03);
+
+transform:
+
+translateY(-3px)
+scale(1.03);
 
 box-shadow:
+
 0 15px 35px -8px rgba(47,156,129,0.7);
+
 }
 
 /* =========================================================
 TELA PRETA
 ========================================================= */
 
-.black-screen{
-display:none;
-
-width:100%;
-min-height:100vh;
+#scene-black{
 
 background:#000;
+
+padding:0;
+
 }
 
-.black-screen.active{
-display:block;
-
-animation:blackFade 1s ease both;
-}
-
-@keyframes blackFade{
-from{
-opacity:0;
-}
-
-to{
-opacity:1;
-}
-}
-
-</style> </head> <body> <!-- ========================================================= MÚSICA DO RYUK ========================================================= -->
+</style> </head> <body> <!-- ========================================================= MUSICA ========================================================= -->
 <audio
 id="themeMusic"
 loop
@@ -522,93 +709,125 @@ preload="auto"
 src="./ryuk.mp3"
 type="audio/mpeg"
 
-Seu navegador não suporta áudio.
-</audio>
-
-<!-- ========================================================= SCENE 0: COVER ========================================================= --> <section class="scene active" id="scene-cover" > <div class="notebook" onclick="openNotebook()" >
+</audio> <!-- ========================================================= CAPA ========================================================= --> <section class="scene active" id="scene-cover" > <div class="notebook" onclick="openNotebook()" >
 <div class="title display">
+
   DEATH NOTE
+
 </div>
 
 <div class="sub">
+
   este caderno pertence apenas a quem<br>
+
   souber decifrar seu conteúdo.
+
 </div>
 
 <div class="music-label">
+
   --Ryuk--<br>
+
   (Minha musica favorita de Death Note, a sua fodase.)
+
 </div>
 
-</div> </section> <!-- ========================================================= SCENE 1: RULES ========================================================= --> <section class="scene" id="scene-rules" > <div class="rules-card">
+</div> </section> <!-- ========================================================= REGRAS ========================================================= --> <section class="scene" id="scene-rules" > <div class="rules-card">
 <div class="eyebrow">
+
   Regras do Caderno
+
 </div>
 
 <h2 class="display">
+
   Antes de continuar, Lerdona
+
 </h2>
 
 <ul class="rules-list">
 
   <li>
+
     Este caderno só funciona se a leitora responder com atenção —
     o que, historicamente, não é o forte da Rafaella.
+
   </li>
 
   <li>
+
     Toda vez que alguém elogiar a roupa do dono deste caderno,
     ele tem o direito de achar que é outra pessoa falando.
     Isso é canon, não bug.
+
   </li>
 
   <li>
+
     É proibido fingir que "melhor que os chungas" não foi a frase
     mais icônica de toda uma história de amor.
+
   </li>
 
   <li>
+
     Ao final deste caderno, uma pergunta será feita.
     Ela só pode ser respondida com sinceridade —
     e de preferência, rápido, pra variar.
+
   </li>
 
   <li>
+
     Após responder o quiz com exatidão, você se tornará digna do uso.
+
   </li>
 
 </ul>
 
-</div> <div class="page-turn" onclick="goTo('quiz')" > virar a página → </div> </section> <!-- ========================================================= SCENE 2: QUIZ ========================================================= --> <section class="scene quiz-card" id="scene-quiz" > <div class="eyebrow q-eyebrow" id="quiz-eyebrow" > Desafio 1 de 3 — Respiração da Memória </div> <div class="progress-wrap">
+</div> <div class="page-turn" onclick="goTo('quiz')" >
+virar a página →
+
+</div> </section> <!-- ========================================================= QUIZ ========================================================= --> <section class="scene quiz-card" id="scene-quiz" > <div class="eyebrow q-eyebrow" id="quiz-eyebrow" >
+Desafio 1 de 3 — Respiração da Memória
+
+</div> <div class="progress-wrap">
 <div
   class="progress-bar"
   id="progress"
 ></div>
 
-</div> <div class="question" id="quiz-question" ></div> <div class="options" id="quiz-options" ></div> <div class="feedback" id="quiz-feedback" ></div> </section> <!-- ========================================================= SCENE 3: INICIAR DESAFIO ========================================================= --> <section class="scene start-challenge" id="scene-start" > <div class="eyebrow start-eyebrow"> Quiz concluído </div> <h1 class="display start-title"> Pronto para iniciar o desafio? </h1> <p class="start-sub"> Você chegou até aqui. Agora é hora de descobrir o que está esperando na próxima página. </p>
+</div> <div class="question" id="quiz-question" ></div> <div class="options" id="quiz-options" ></div> <div class="feedback" id="quiz-feedback" ></div> </section> <!-- ========================================================= INICIAR DESAFIO ========================================================= --> <section class="scene start-challenge" id="scene-start" > <div class="eyebrow start-eyebrow">
+Quiz concluído
+
+</div> <h1 class="display start-title">
+Pronto para iniciar o desafio?
+
+</h1> <p class="start-sub">
+Você chegou até aqui. Agora é hora de descobrir
+o que está esperando na próxima página.
+
+</p>
 <button
 class="start-button"
 onclick="startChallenge()"
 
 INICIAR DESAFIO
 
-</button> </section> <!-- ========================================================= SCENE 4: TELA PRETA ========================================================= --> <section class="black-screen" id="scene-black" ></section> <script>
+</button> </section> <!-- ========================================================= TELA PRETA ========================================================= --> <section class="scene" id="scene-black" ></section> <script>
 /* =========================================================
-MÚSICA
+MUSICA
 ========================================================= */
 
 const themeMusic =
 document.getElementById('themeMusic');
 
-/*
-Tenta iniciar a música assim que o site
-termina de carregar.
-*/
-
 function playTheme(){
 
 if(!themeMusic){
+
 return;
+
 }
 
 themeMusic.volume = 0.55;
@@ -618,23 +837,27 @@ themeMusic.play();
 
 if(promise !== undefined){
 
-promise.catch(() => {
+promise.catch(
+  function(){
 
-  /*
-    O navegador pode bloquear autoplay.
+    /*
+      Alguns navegadores bloqueiam
+      autoplay de áudio.
 
-    Nesse caso, o primeiro clique/toque
-    do usuário iniciará a música.
-  */
+      Nesse caso, o primeiro clique
+      do usuário inicia a música.
+    */
 
-});
+  }
+);
 
 }
 
 }
 
 /*
-Tenta tocar assim que a página carrega.
+Tenta iniciar automaticamente
+quando a página carregar.
 */
 
 window.addEventListener(
@@ -647,38 +870,48 @@ playTheme();
 );
 
 /*
-Caso o navegador bloqueie autoplay,
-qualquer primeira interação do usuário
-inicia a música.
-
-Depois que a música começar, os listeners
-continuam funcionando sem problema.
+Se o navegador bloquear o autoplay,
+qualquer interação inicia a música.
 */
-
-function startMusicOnInteraction(){
-
-if(themeMusic.paused){
-
-playTheme();
-
-}
-
-}
 
 document.addEventListener(
 'click',
-startMusicOnInteraction
+function(){
+
+if(themeMusic.paused){
+
+  playTheme();
+
+}
+
+}
 );
 
 document.addEventListener(
 'touchstart',
-startMusicOnInteraction,
+function(){
+
+if(themeMusic.paused){
+
+  playTheme();
+
+}
+
+},
 {passive:true}
 );
 
 document.addEventListener(
 'keydown',
-startMusicOnInteraction
+function(){
+
+if(themeMusic.paused){
+
+  playTheme();
+
+}
+
+}
 );
 
 /* =========================================================
@@ -690,9 +923,11 @@ const quizData = [
 {
 
 eyebrow:
+
   "Desafio 1 de 3 — Respiração da Memória",
 
 question:
+
   "Como o Felipe e a Rafaella se conheceram?",
 
 options:[
@@ -708,14 +943,17 @@ options:[
 correct:0,
 
 feedback:
+
   "Certo. Ela mandou \"melhor que os chungas\" e o Felipe, com toda elegância, achou que era outra pessoa respondendo.",
 
 wrongFeedbacks:{
 
   1:
+
     "Alem de burra<br>é mentirosa.",
 
   2:
+
     "Senhor. Tem momentos que sua burrice ultrapassa o meu esperado"
 
 }
@@ -725,9 +963,11 @@ wrongFeedbacks:{
 {
 
 eyebrow:
+
   "Desafio 2 de 3 — Julgamento do Caderno",
 
 question:
+
   "Qual é o apelido oficial e definitivo da Rafaella?",
 
 options:[
@@ -743,14 +983,17 @@ options:[
 correct:1,
 
 feedback:
+
   "Óbvio. Título conquistado com muito mérito e nenhuma pressa.",
 
 wrongFeedbacks:{
 
   0:
+
     "Jurou demais né querida.",
 
   2:
+
     "Taquiopariu, jura mais."
 
 }
@@ -760,9 +1003,11 @@ wrongFeedbacks:{
 {
 
 eyebrow:
+
   "Desafio 3 de 3 — Escolha do Nome no Caderno",
 
 question:
+
   "Qual é o anime favorito dos dois?",
 
 options:[
@@ -778,14 +1023,17 @@ options:[
 correct:2,
 
 feedback:
+
   "Isso mesmo — com Demon Slayer logo atrás, sempre no pódio.",
 
 wrongFeedbacks:{
 
   0:
+
     "De gigante já basta o meu.",
 
   1:
+
     "Não tenho trocadilho pra isso então sei la."
 
 }
@@ -805,8 +1053,11 @@ function goTo(id){
 document
 .querySelectorAll('.scene')
 .forEach(
-scene =>
-scene.classList.remove('active')
+function(scene){
+
+    scene.classList.remove('active');
+
+  }
 );
 
 const target =
@@ -814,11 +1065,13 @@ document.getElementById(
 'scene-' + id
 );
 
-if(target){
+if(!target){
 
-target.classList.add('active');
+return;
 
 }
+
+target.classList.add('active');
 
 if(id === 'quiz'){
 
@@ -877,9 +1130,7 @@ document.getElementById(
 
 feedback.innerHTML = '';
 
-feedback.classList.remove(
-'yellow'
-);
+feedback.classList.remove('yellow');
 
 const optsWrap =
 document.getElementById(
@@ -889,7 +1140,7 @@ document.getElementById(
 optsWrap.innerHTML = '';
 
 data.options.forEach(
-(opt, i) => {
+function(opt,i){
 
   const btn =
     document.createElement(
@@ -903,11 +1154,14 @@ data.options.forEach(
     opt;
 
   btn.onclick =
-    () =>
+    function(){
+
       selectAnswer(
         i,
         btn
       );
+
+    };
 
   optsWrap.appendChild(
     btn
@@ -923,7 +1177,10 @@ data.options.forEach(
 RESPOSTA
 ========================================================= */
 
-function selectAnswer(i, btnEl){
+function selectAnswer(
+i,
+btnEl
+){
 
 const data =
 quizData[qIndex];
@@ -937,9 +1194,7 @@ document.getElementById(
 
 if(i !== data.correct){
 
-btnEl.classList.add(
-  'wrong'
-);
+btnEl.classList.add('wrong');
 
 btnEl.style.pointerEvents =
   'none';
@@ -979,18 +1234,17 @@ return;
 document
 .querySelectorAll('.opt')
 .forEach(
-button =>
-button.style.pointerEvents =
-'none'
+function(button){
+
+    button.style.pointerEvents =
+      'none';
+
+  }
 );
 
-btnEl.classList.add(
-'correct'
-);
+btnEl.classList.add('correct');
 
-feedback.classList.remove(
-'yellow'
-);
+feedback.classList.remove('yellow');
 
 feedback.textContent =
 data.feedback;
@@ -1005,7 +1259,7 @@ quizData.length *
 ) + '%';
 
 setTimeout(
-() => {
+function(){
 
   qIndex++;
 
@@ -1019,9 +1273,10 @@ setTimeout(
   }else{
 
     /*
-      Quiz terminou.
+      Quiz terminado.
 
-      Vai diretamente para:
+      Vai para a tela:
+
       "Pronto para iniciar o desafio?"
     */
 
@@ -1043,27 +1298,15 @@ INICIAR DESAFIO
 function startChallenge(){
 
 /*
-Por enquanto, o botão leva
-para uma tela completamente preta.
+Agora usamos exatamente o mesmo
+sistema de navegação das outras telas.
+
+Isso evita que a página inteira
+fique preta antes da hora.
+
 */
 
-document
-.querySelectorAll('.scene')
-.forEach(
-scene =>
-scene.classList.remove('active')
-);
-
-document
-.getElementById('scene-black')
-.classList.add('active');
-
-document.body.style.background =
-'#000';
-
-/*
-Mantém a música tocando por enquanto.
-*/
+goTo('black');
 
 }
 
