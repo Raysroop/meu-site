@@ -3,157 +3,245 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Death Note</title>
 
 <style>
+
 @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=EB+Garamond:ital,wght@0,400;0,600;1,500&family=Shippori+Mincho:wght@500;800&display=swap');
 
 :root{
-  --black: #0a0a0c;
-  --black-2: #131215;
-  --paper: #ede3c8;
-  --paper-dim: #ddd0ab;
-  --blood: #a61c1c;
-  --blood-bright: #d1372f;
-  --teal: #1f6f5c;
-  --teal-bright: #2f9c81;
-  --gold: #c9a227;
-  --ink: #1c1a16;
+  --black:#0a0a0c;
+  --black-2:#131215;
+  --paper:#ede3c8;
+  --paper-dim:#ddd0ab;
+  --blood:#a61c1c;
+  --blood-bright:#d1372f;
+  --teal:#1f6f5c;
+  --teal-bright:#2f9c81;
+  --gold:#c9a227;
+  --ink:#1c1a16;
 }
 
-*{ box-sizing:border-box; margin:0; padding:0; }
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
-html,body{
-  height:100%;
+html,
+body{
+  min-height:100%;
   background:var(--black);
   color:var(--paper);
-  font-family:'EB Garamond', serif;
+  font-family:'EB Garamond',serif;
   overflow-x:hidden;
 }
 
 body{
   min-height:100vh;
+
   background:
-    radial-gradient(ellipse at 50% -10%, rgba(166,28,28,0.12), transparent 60%),
-    radial-gradient(ellipse at 50% 110%, rgba(31,111,92,0.10), transparent 60%),
+    radial-gradient(
+      ellipse at 50% -10%,
+      rgba(166,28,28,.12),
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse at 50% 110%,
+      rgba(31,111,92,.10),
+      transparent 60%
+    ),
     var(--black);
-}
-
-.eyebrow{
-  font-family:'Shippori Mincho', serif;
-  font-weight:800;
-  letter-spacing:0.35em;
-  text-transform:uppercase;
-  font-size:0.7rem;
-  color:var(--gold);
-}
-
-.display{
-  font-family:'Cinzel Decorative', serif;
-  font-weight:900;
-  line-height:1.1;
 }
 
 .scene{
   display:none;
+
   min-height:100vh;
   width:100%;
+
   align-items:center;
   justify-content:center;
+
   flex-direction:column;
+
   padding:6vh 6vw;
+
   text-align:center;
-  animation:fadeIn 0.9s ease both;
+
+  animation:fadeIn .9s ease both;
 }
 
-.scene.active{ display:flex; }
+.scene.active{
+  display:flex;
+}
 
 @keyframes fadeIn{
-  from{ opacity:0; transform:translateY(14px); }
-  to{ opacity:1; transform:translateY(0); }
+
+  from{
+    opacity:0;
+    transform:translateY(14px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+
 }
 
-/* ---------- COVER ---------- */
+.eyebrow{
+  font-family:'Shippori Mincho',serif;
+  font-weight:800;
+  letter-spacing:.35em;
+  text-transform:uppercase;
+  font-size:.7rem;
+  color:var(--gold);
+}
+
+.display{
+  font-family:'Cinzel Decorative',serif;
+  font-weight:900;
+  line-height:1.1;
+}
+
+
+/* =========================================================
+   CAPA
+========================================================= */
 
 .notebook{
-  width:min(360px, 78vw);
+
+  width:min(360px,78vw);
   aspect-ratio:3/4.3;
-  touch-action:manipulation;
-  background:linear-gradient(160deg, #1a1414, #0f0c0c 60%);
+
+  background:
+    linear-gradient(
+      160deg,
+      #1a1414,
+      #0f0c0c 60%
+    );
+
   border:1px solid #2c2222;
   border-radius:4px;
-  box-shadow:0 40px 80px -20px rgba(0,0,0,0.8),
-             inset 0 0 60px rgba(166,28,28,0.06);
+
+  box-shadow:
+    0 40px 80px -20px rgba(0,0,0,.8),
+    inset 0 0 60px rgba(166,28,28,.06);
+
   display:flex;
   flex-direction:column;
+
   align-items:center;
   justify-content:center;
+
   gap:1.2rem;
+
   cursor:pointer;
-  transition:transform 0.4s ease, box-shadow 0.4s ease;
+
+  transition:.4s ease;
+
   position:relative;
 }
 
 .notebook::before{
+
   content:"";
+
   position:absolute;
+
   inset:14px;
-  border:1px solid rgba(166,28,28,0.35);
+
+  border:1px solid rgba(166,28,28,.35);
+
 }
 
 .notebook:hover{
-  transform:translateY(-4px) scale(1.01);
-  box-shadow:0 50px 90px -20px rgba(166,28,28,0.25),
-             inset 0 0 60px rgba(166,28,28,0.1);
+
+  transform:
+    translateY(-4px)
+    scale(1.01);
+
 }
 
 .notebook .title{
-  font-size:clamp(2rem, 6vw, 2.6rem);
+
+  font-size:
+    clamp(2rem,6vw,2.6rem);
+
   color:var(--blood-bright);
-  letter-spacing:0.06em;
+
+  letter-spacing:.06em;
+
 }
 
 .notebook .sub{
-  font-family:'Shippori Mincho', serif;
+
+  font-family:'Shippori Mincho',serif;
+
   color:var(--paper-dim);
-  font-size:0.95rem;
-  letter-spacing:0.08em;
+
+  font-size:.95rem;
+
+  letter-spacing:.08em;
+
   line-height:1.6;
+
   max-width:280px;
+
 }
 
 .music-label{
-  margin-top:0.4rem;
+
+  margin-top:.4rem;
+
   color:var(--gold);
-  font-family:'EB Garamond', serif;
+
   font-style:italic;
-  font-size:0.9rem;
+
+  font-size:.9rem;
+
   line-height:1.4;
+
   max-width:290px;
+
 }
 
-@keyframes pulse{
-  50%{ opacity:0.35; }
-}
 
-/* ---------- RULES ---------- */
+/* =========================================================
+   REGRAS
+========================================================= */
 
 .rules-card{
+
   max-width:560px;
+
   background:var(--paper);
+
   color:var(--ink);
+
   border-radius:2px;
+
   padding:2.6rem 2.2rem;
-  box-shadow:0 30px 70px -25px rgba(0,0,0,0.7);
+
+  box-shadow:
+    0 30px 70px -25px rgba(0,0,0,.7);
+
   text-align:left;
-  position:relative;
+
 }
 
 .rules-card h2{
-  font-family:'Cinzel Decorative', serif;
+
+  font-family:'Cinzel Decorative',serif;
+
   color:var(--blood);
+
   font-size:1.5rem;
-  margin-bottom:0.3rem;
+
+  margin-bottom:.3rem;
+
 }
 
 .rules-card .eyebrow{
@@ -161,69 +249,120 @@ body{
 }
 
 .rules-list{
+
   margin-top:1.4rem;
+
   list-style:none;
+
   display:flex;
+
   flex-direction:column;
-  gap:0.9rem;
+
+  gap:.9rem;
+
   font-size:1.05rem;
+
+  counter-reset:rule;
+
 }
 
 .rules-list li{
+
   padding-left:2rem;
+
   position:relative;
+
   line-height:1.5;
+
 }
 
 .rules-list li::before{
+
   content:counter(rule);
+
   counter-increment:rule;
+
   position:absolute;
+
   left:0;
   top:0;
-  font-family:'Cinzel Decorative';
-  font-weight:900;
-  color:var(--blood);
-}
 
-.rules-list{
-  counter-reset:rule;
+  font-family:'Cinzel Decorative';
+
+  font-weight:900;
+
+  color:var(--blood);
+
 }
 
 .page-turn{
+
   margin-top:2rem;
+
   cursor:pointer;
+
   color:var(--gold);
-  letter-spacing:0.2em;
+
+  letter-spacing:.2em;
+
   text-transform:uppercase;
-  font-size:0.75rem;
-  animation:pulse 1.8s infinite ease-in-out;
+
+  font-size:.75rem;
+
 }
 
-/* ---------- QUIZ ---------- */
+
+/* =========================================================
+   QUIZ
+========================================================= */
 
 .quiz-card{
+
   max-width:560px;
   width:100%;
+
 }
 
 .progress-wrap{
+
   width:100%;
+
   max-width:420px;
+
   height:10px;
+
   background:#1e1e22;
+
   border-radius:6px;
+
   overflow:hidden;
-  margin:1.6rem auto 2.2rem;
+
+  margin:
+    1.6rem auto
+    2.2rem;
+
   border:1px solid #2c2c31;
+
 }
 
 .progress-bar{
+
   height:100%;
+
   width:0%;
-  background:linear-gradient(90deg, var(--teal), var(--gold));
-  transition:width 0.6s ease;
-  box-shadow:0 0 14px var(--teal-bright);
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--teal),
+      var(--gold)
+    );
+
+  transition:width .6s ease;
+
+  box-shadow:
+    0 0 14px var(--teal-bright);
+
 }
 
 .q-eyebrow{
@@ -231,267 +370,636 @@ body{
 }
 
 .question{
-  font-size:clamp(1.2rem, 3.2vw, 1.6rem);
-  margin:0.6rem 0 1.8rem;
+
+  font-size:
+    clamp(1.2rem,3.2vw,1.6rem);
+
+  margin:
+    .6rem 0
+    1.8rem;
+
   color:var(--paper);
+
 }
 
 .options{
+
   display:flex;
+
   flex-direction:column;
-  gap:0.8rem;
+
+  gap:.8rem;
+
   width:100%;
+
   max-width:420px;
+
 }
 
 .opt{
+
   background:var(--black-2);
+
   border:1px solid #2c2c31;
+
   color:var(--paper);
-  font-family:'EB Garamond', serif;
+
+  font-family:'EB Garamond',serif;
+
   font-size:1.05rem;
-  padding:0.85rem 1.2rem;
+
+  padding:.85rem 1.2rem;
+
   border-radius:6px;
+
   cursor:pointer;
-  transition:all 0.25s ease;
+
+  transition:.25s ease;
+
   text-align:left;
+
 }
 
 .opt:hover{
+
   border-color:var(--teal-bright);
+
   background:#171a19;
+
   transform:translateX(4px);
+
 }
 
 .opt.correct{
+
   border-color:var(--teal-bright);
+
   background:#123028;
+
   color:var(--teal-bright);
+
 }
 
 .opt.wrong{
-  border-color:var(--blood-bright);
-  background:#2a1414;
-  color:var(--blood-bright);
-  animation:shake 0.35s ease;
-}
 
-@keyframes shake{
-  25%{ transform:translateX(-5px); }
-  75%{ transform:translateX(5px); }
+  border-color:var(--blood-bright);
+
+  background:#2a1414;
+
+  color:var(--blood-bright);
+
 }
 
 .feedback{
+
   margin-top:1.6rem;
+
   min-height:2.8rem;
-  font-family:'Shippori Mincho', serif;
-  font-size:0.95rem;
+
+  font-family:'Shippori Mincho',serif;
+
+  font-size:.95rem;
+
   color:var(--gold);
+
   line-height:1.5;
+
 }
 
 .feedback.yellow{
   color:#ffd84a;
-  text-shadow:0 0 8px rgba(255,216,74,0.15);
 }
 
-/* ---------- BLACKOUT ---------- */
 
-#scene-blackout{
-  background:#000;
-}
-
-.blackout-text{
-  color:var(--paper);
-  font-family:'Shippori Mincho', serif;
-  font-size:clamp(1.1rem, 3.5vw, 1.5rem);
-  max-width:500px;
-  line-height:1.7;
-}
-
-/* ---------- RESPOSTA LIVRE ---------- */
+/* =========================================================
+   INPUT
+========================================================= */
 
 .text-answer{
+
   width:100%;
+
   background:var(--black-2);
+
   border:1px solid #2c2c31;
+
   color:var(--paper);
-  font-family:'EB Garamond', serif;
+
+  font-family:'EB Garamond',serif;
+
   font-size:1.05rem;
-  padding:0.85rem 1.2rem;
+
+  padding:.85rem 1.2rem;
+
   border-radius:6px;
+
   outline:none;
-  transition:border-color 0.25s ease;
+
 }
 
 .text-answer:focus{
+
   border-color:var(--teal-bright);
+
 }
 
-.submit-answer{
+
+/* =========================================================
+   BLACKOUT
+========================================================= */
+
+.blackout{
+
+  background:#000;
+
+}
+
+.story-text{
+
+  max-width:800px;
+
+  width:100%;
+
+  color:var(--paper);
+
+  font-family:'EB Garamond',serif;
+
+  font-size:
+    clamp(1.15rem,3vw,1.45rem);
+
+  line-height:1.8;
+
+  text-align:left;
+
+  white-space:pre-line;
+
+}
+
+.story-text.center{
   text-align:center;
 }
 
-/* ---------- GIF DE RECOMPENSA ---------- */
+.story-text.red{
+  color:#e33434;
+}
+
+.story-button{
+
+  margin-top:2rem;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--teal-bright),
+      var(--teal)
+    );
+
+  color:#080b0a;
+
+  border:0;
+
+  padding:.9rem 2rem;
+
+  border-radius:8px;
+
+  font-family:'Shippori Mincho',serif;
+
+  font-weight:800;
+
+  font-size:1rem;
+
+  cursor:pointer;
+
+  box-shadow:
+    0 10px 30px -8px
+    rgba(47,156,129,.6);
+
+}
+
+.story-button:hover{
+  transform:scale(1.04);
+}
+
+
+/* =========================================================
+   PERSONAGENS
+========================================================= */
+
+.character-title{
+
+  font-size:
+    clamp(1.8rem,5vw,2.5rem);
+
+  margin-bottom:2rem;
+
+}
+
+.character-options{
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:.8rem;
+
+  width:min(420px,90vw);
+
+}
+
+.character-options button{
+
+  padding:1rem;
+
+  background:var(--black-2);
+
+  color:var(--paper);
+
+  border:1px solid #333;
+
+  border-radius:7px;
+
+  font-family:'EB Garamond',serif;
+
+  font-size:1.15rem;
+
+  cursor:pointer;
+
+  transition:.25s;
+
+}
+
+.character-options button:hover{
+
+  border-color:var(--teal-bright);
+
+  transform:translateX(4px);
+
+}
+
+
+/* =========================================================
+   GIF
+========================================================= */
 
 #scene-gif{
+
   background:#000;
-  padding:0;
+
+  padding:2rem;
+
 }
 
 .reward-gif{
+
   max-width:90vw;
-  max-height:80vh;
+
+  max-height:70vh;
+
   border-radius:8px;
-  box-shadow:0 30px 80px -20px rgba(0,0,0,0.9);
+
+  box-shadow:
+    0 30px 80px -20px
+    rgba(0,0,0,.9);
+
 }
 
-/* ---------- REVEAL ---------- */
+.gif-text{
 
-.reveal-eyebrow{
-  color:var(--blood-bright);
-}
+  margin-top:1.5rem;
 
-.reveal-title{
-  font-size:clamp(1.8rem, 5.5vw, 2.8rem);
-  margin:0.8rem 0 0.6rem;
   color:var(--paper);
+
+  font-size:1.15rem;
+
+  font-family:'EB Garamond',serif;
+
 }
 
-.reveal-sub{
-  color:var(--paper-dim);
-  max-width:480px;
-  margin-bottom:2.6rem;
-  font-size:1.1rem;
-  line-height:1.6;
+
+/* =========================================================
+   DECLARAÇÃO
+========================================================= */
+
+.declaration{
+
+  background:#000;
+
 }
 
-.ask{
-  font-family:'Cinzel Decorative';
-  font-size:clamp(1.6rem, 5vw, 2.4rem);
-  color:var(--gold);
-  margin-bottom:2.4rem;
+.declaration-text{
+
+  max-width:850px;
+
+  color:var(--paper);
+
+  font-family:'EB Garamond',serif;
+
+  font-size:
+    clamp(1.05rem,2.5vw,1.3rem);
+
+  line-height:1.9;
+
+  text-align:left;
+
+  white-space:pre-line;
+
 }
 
-.btn-row{
-  position:relative;
-  display:flex;
-  gap:1.6rem;
-  align-items:center;
-  justify-content:center;
-  min-height:80px;
-}
+.fake-link{
 
-.btn{
-  padding:0.9rem 2.2rem;
-  border-radius:8px;
-  font-family:'Shippori Mincho', serif;
-  font-weight:800;
-  letter-spacing:0.05em;
-  font-size:1.05rem;
-  cursor:pointer;
+  color:inherit;
+
+  background:none;
+
   border:none;
-  transition:transform 0.2s ease;
+
+  padding:0;
+
+  margin:0;
+
+  font:inherit;
+
+  cursor:pointer;
+
+  text-decoration:none;
+
 }
 
-.btn-yes{
-  background:linear-gradient(135deg, var(--teal-bright), var(--teal));
-  color:#0a0a0c;
-  box-shadow:0 10px 30px -8px rgba(47,156,129,0.6);
+.fake-link:hover{
+
+  color:var(--teal-bright);
+
 }
 
-.btn-yes:hover{
-  transform:scale(1.06);
-}
 
-.btn-no{
-  background:transparent;
-  border:1px solid #444;
-  color:#888;
-  position:relative;
-}
+/* =========================================================
+   FINAL
+========================================================= */
 
 .final-card{
-  max-width:500px;
+
+  max-width:600px;
+
 }
 
 .final-card .display{
-  font-size:clamp(1.8rem, 6vw, 2.6rem);
+
+  font-size:
+    clamp(1.8rem,6vw,2.6rem);
+
   color:var(--teal-bright);
+
   margin-bottom:1rem;
+
 }
 
 .final-card p{
+
   color:var(--paper-dim);
+
   font-size:1.1rem;
+
   line-height:1.6;
+
 }
 
 .heart{
+
   font-size:2.4rem;
+
   margin-bottom:1rem;
+
 }
 
-.completion-info{
-  margin-top:2rem;
-  padding:1rem 1.2rem;
-  border:1px solid #2c2c31;
-  border-radius:6px;
-  background:#111114;
-  color:#888;
-  font-family:'Shippori Mincho', serif;
-  font-size:0.8rem;
-  line-height:1.7;
+
+/* =========================================================
+   ALIANÇA
+========================================================= */
+
+.alliance-scene{
+
+  background:#000;
+
 }
 
-.completion-status{
-  color:var(--teal-bright);
+.alliance-title{
+
+  max-width:850px;
+
+  color:var(--paper);
+
+  font-family:'EB Garamond',serif;
+
+  font-size:
+    clamp(1.15rem,3vw,1.45rem);
+
+  line-height:1.8;
+
+  text-align:center;
+
+  white-space:pre-line;
+
 }
 
-footer.hint{
+.ring-button{
+
   margin-top:2.5rem;
-  font-size:0.75rem;
-  color:#555;
-  letter-spacing:0.1em;
+
+  width:120px;
+
+  height:120px;
+
+  border-radius:50%;
+
+  border:2px solid #c9a227;
+
+  background:
+
+    radial-gradient(
+      circle,
+      #fff4a8 0%,
+      #c9a227 30%,
+      #8d6811 70%,
+      #382a08 100%
+    );
+
+  color:#fff5a8;
+
+  font-size:4rem;
+
+  cursor:pointer;
+
+  box-shadow:
+    0 0 30px rgba(201,162,39,.4),
+    0 0 70px rgba(201,162,39,.15);
+
+  transition:.3s ease;
+
 }
+
+.ring-button:hover{
+
+  transform:
+    scale(1.08)
+    rotate(4deg);
+
+  box-shadow:
+    0 0 45px rgba(201,162,39,.65),
+    0 0 90px rgba(201,162,39,.25);
+
+}
+
+.ring-hint{
+
+  margin-top:1rem;
+
+  color:var(--paper-dim);
+
+  font-style:italic;
+
+  font-size:1rem;
+
+}
+
+
+/* =========================================================
+   FINAL ALIANÇA
+========================================================= */
+
+.final-alliance{
+
+  background:#000;
+
+}
+
+.final-alliance-text{
+
+  color:var(--teal-bright);
+
+  font-family:'EB Garamond',serif;
+
+  font-size:
+    clamp(1.3rem,3vw,1.7rem);
+
+  line-height:1.8;
+
+  text-align:center;
+
+  max-width:800px;
+
+}
+
+
+/* =========================================================
+   AUDIO
+========================================================= */
+
+audio{
+  display:none;
+}
+
 </style>
 </head>
 
 <body>
 
-<!-- MÚSICAS -->
-<audio id="themeMusic" loop preload="auto">
-  <source src="ryuk.mp3" type="audio/mpeg">
+
+<!-- =========================================================
+     ÁUDIOS
+========================================================= -->
+
+<audio
+  id="themeMusic"
+  loop
+  preload="auto">
+
+  <source
+    src="ryuk.mp3"
+    type="audio/mpeg">
+
 </audio>
 
-<audio id="kissSound" preload="auto">
-  <source src="kiss.mp3" type="audio/mpeg">
+
+<audio
+  id="kissMusic"
+  preload="auto">
+
+  <source
+    src="kiss.mp3"
+    type="audio/mpeg">
+
 </audio>
 
-<!-- SCENE 1: COVER -->
-<section class="scene active" id="scene-cover">
-  <div class="notebook" id="notebook">
-    <div class="title display">DEATH NOTE</div>
+
+<audio
+  id="purpleRain"
+  loop
+  preload="auto">
+
+  <source
+    src="purple_rain.mp3"
+    type="audio/mpeg">
+
+</audio>
+
+
+<!-- =========================================================
+     CAPA
+========================================================= -->
+
+<section
+  class="scene active"
+  id="scene-cover">
+
+  <div
+    class="notebook"
+    onclick="openNotebook()">
+
+    <div class="title display">
+      DEATH NOTE
+    </div>
+
     <div class="sub">
+
       este caderno pertence apenas a quem<br>
       souber decifrar seu conteúdo.
+
     </div>
 
     <div class="music-label">
+
       --Ryuk--<br>
-      (Minha musica favorita de Death Note, a sua fodase.)
+
+      (Minha musica favorita de Death Note,
+      a sua fodase.)
+
     </div>
+
   </div>
+
 </section>
 
-<!-- SCENE 2: RULES -->
-<section class="scene" id="scene-rules">
-  <div class="rules-card">
-    <div class="eyebrow">Regras do Caderno</div>
 
-    <h2 class="display">Antes de continuar, Lerdona</h2>
+<!-- =========================================================
+     REGRAS
+========================================================= -->
+
+<section
+  class="scene"
+  id="scene-rules">
+
+  <div class="rules-card">
+
+    <div class="eyebrow">
+      Regras do Caderno
+    </div>
+
+    <h2 class="display">
+      Antes de continuar, Lerdona
+    </h2>
 
     <ul class="rules-list">
+
       <li>
         Este caderno só funciona se a leitora responder com atenção —
         o que, historicamente, não é o forte da Rafaella.
@@ -504,214 +1012,678 @@ footer.hint{
       </li>
 
       <li>
-        É proibido fingir que "melhor que os chungas" não foi
-        a frase mais icônica de toda uma história de amor.
+        É proibido fingir que "melhor que os chungas" não foi a frase
+        mais icônica de toda uma história de amor.
       </li>
 
       <li>
         Ao final deste caderno, uma pergunta será feita.
-        Ela só pode ser respondida com sinceridade —
-        e de preferência, rápido, pra variar.
+        Ela só pode ser respondida com sinceridade.
       </li>
 
       <li>
-        Apos responder o quiz com exatidão,
-        você se tornara digna do uso.
+        Após responder o quiz com exatidão,
+        você se tornará digna do uso.
       </li>
+
     </ul>
+
   </div>
 
-  <div class="page-turn" onclick="startQuiz()">
+  <div
+    class="page-turn"
+    onclick="startQuiz()">
+
     virar a página →
+
   </div>
+
 </section>
 
-<!-- SCENE 3: QUIZ -->
-<section class="scene quiz-card" id="scene-quiz">
-  <div class="eyebrow q-eyebrow" id="quiz-eyebrow">
+
+<!-- =========================================================
+     QUIZ
+========================================================= -->
+
+<section
+  class="scene quiz-card"
+  id="scene-quiz">
+
+  <div
+    class="eyebrow q-eyebrow"
+    id="quiz-eyebrow">
+
     Julgamento do Caderno
+
   </div>
 
   <div class="progress-wrap">
-    <div class="progress-bar" id="progress"></div>
+
+    <div
+      class="progress-bar"
+      id="progress">
+    </div>
+
   </div>
 
-  <div class="question" id="quiz-question"></div>
+  <div
+    class="question"
+    id="quiz-question">
+  </div>
 
-  <div class="options" id="quiz-options"></div>
+  <div
+    class="options"
+    id="quiz-options">
+  </div>
 
-  <div class="feedback" id="quiz-feedback"></div>
+  <div
+    class="feedback"
+    id="quiz-feedback">
+  </div>
+
 </section>
 
-<!-- SCENE 3B: BLACKOUT -->
-<section class="scene" id="scene-blackout">
-  <div class="blackout-text" id="blackout-text"></div>
+
+<!-- =========================================================
+     BLACKOUT QUIZ
+========================================================= -->
+
+<section
+  class="scene blackout"
+  id="scene-blackout">
+
+  <div
+    class="story-text center"
+    id="blackout-text">
+  </div>
+
 </section>
 
-<!-- SCENE 3C: GIF DE RECOMPENSA -->
-<section class="scene" id="scene-gif">
-  <img class="reward-gif" src="reward.gif" alt="">
+
+<!-- =========================================================
+     GIF
+========================================================= -->
+
+<section
+  class="scene"
+  id="scene-gif">
+
+  <img
+    class="reward-gif"
+    src="reward.gif"
+    alt="Reward">
+
+  <div class="gif-text">
+
+    Calma, olha isso aqui antes de prosseguir.
+    Legal né.
+
+  </div>
+
 </section>
 
-<!-- SCENE 4: REVEAL -->
-<section class="scene" id="scene-reveal">
-  <div class="eyebrow reveal-eyebrow">
+
+<!-- =========================================================
+     DESAFIO
+========================================================= -->
+
+<section
+  class="scene"
+  id="scene-challenge">
+
+  <div class="eyebrow">
     Última página
   </div>
 
-  <h1 class="reveal-title display">
-    A lâmina corta, o caderno se abre
+  <h1
+    class="display"
+    style="
+      font-size:clamp(1.8rem,5vw,2.7rem);
+      margin:1rem 0;
+    ">
+
+    Você é digna de obter o Death Note
+
   </h1>
 
-  <p class="reveal-sub">
-    Você decorou nossa história melhor do que finge decorar
-    as coisas no dia a dia. Só falta uma resposta.
+  <p class="story-text center">
+
+    Você chegou até aqui e provou que decorou mais da nossa historia
+    do que das coisas do seu dia a dia que voce finge lembrar.
+
   </p>
 
-  <div class="ask">
-    Rafaella, aceita namorar comigo?
-  </div>
+  <button
+    class="story-button"
+    onclick="showCharacters()">
 
-  <div class="btn-row">
-    <button class="btn btn-yes" onclick="goTo('final')">
-      SIM, ÓBVIO
-    </button>
+    Estou pronta
 
-    <button class="btn btn-no" id="btn-no">
-      Deixa eu pensar
-    </button>
-  </div>
+  </button>
 
-  <footer class="hint">
-    (o segundo botão foge. como sempre, tenta acompanhar.)
-  </footer>
 </section>
 
-<!-- SCENE 5: FINAL -->
-<section class="scene final-card" id="scene-final">
-  <div class="heart">🖤</div>
 
-  <div class="display">
-    Combinado, lerdona.
+<!-- =========================================================
+     PERSONAGEM
+========================================================= -->
+
+<section
+  class="scene"
+  id="scene-characters">
+
+  <div class="eyebrow">
+    Escolha
   </div>
 
-  <p>
-    De todas as pessoas que já responderam um story achando que era outra,
-    você foi a única que valeu a confusão. Bem-vinda oficialmente ao time.
-  </p>
+  <h1 class="display character-title">
 
-  <div class="completion-info" id="completionInfo">
-    <div class="completion-status">
-      ✓ QUIZ CONCLUÍDO
-    </div>
+    Escolha seu personagem
 
-    <div id="ipDisplay">
-      Verificando informações...
-    </div>
+  </h1>
+
+  <div class="character-options">
+
+    <button
+      onclick="wrongCharacter('kira')">
+
+      Kira
+
+    </button>
+
+    <button
+      onclick="wrongCharacter('mikami')">
+
+      Mikami
+
+    </button>
+
+    <button
+      onclick="correctCharacter()">
+
+      L
+
+    </button>
+
+    <button
+      onclick="wrongCharacter('muichiro')">
+
+      Muichiro Tokito
+
+    </button>
+
   </div>
+
+  <div
+    class="feedback"
+    id="character-feedback">
+  </div>
+
 </section>
+
+
+<!-- =========================================================
+     HISTÓRIA 1
+========================================================= -->
+
+<section
+  class="scene"
+  id="scene-story1">
+
+  <div class="story-text">
+
+Faz um tempo que Light Yagami está estranho ... Ele está trabalhando tanto e está me deixando preocupada, nosso filho mesmo mal tem visto ele, ele nunca foi assim ... Eu PRECISO descobrir o que tem de errado com ele!
+
+  </div>
+
+  <button
+    class="story-button"
+    onclick="showKitchen()">
+
+    Prosseguir com o BL
+
+  </button>
+
+</section>
+
+
+<!-- =========================================================
+     COZINHA
+========================================================= -->
+
+<section
+  class="scene"
+  id="scene-kitchen">
+
+  <div class="story-text">
+
+Light Yagami está na cozinha agora, talvez eu devesse perguntar o que tem de errado com ele.
+
+  </div>
+
+  <div
+    class="character-options"
+    style="margin-top:2rem;">
+
+    <button
+      onclick="wrongKitchen('abracar')">
+
+      Abraçar ele e perguntar o que tem de errado com ele
+
+    </button>
+
+    <button
+      onclick="correctKitchen()">
+
+      Jogar o Death Note na pia e perguntar o que tem de errado com ele
+
+    </button>
+
+    <button
+      onclick="wrongKitchen('amelie')">
+
+      Abrir o Death Note e escrever o nome da filha de vocês dois, Amelie
+
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     RESULTADO COZINHA
+========================================================= -->
+
+<section
+  class="scene blackout"
+  id="scene-kitchen-result">
+
+  <div
+    class="story-text red"
+    id="kitchen-result-text">
+  </div>
+
+  <button
+    class="story-button"
+    id="kitchen-result-button"
+    onclick="returnToStoryStart()"
+    style="display:none;">
+
+    Retornar para o inicio
+
+  </button>
+
+</section>
+
+
+<!-- =========================================================
+     HISTÓRIA 2
+========================================================= -->
+
+<section
+  class="scene"
+  id="scene-story2">
+
+  <div class="story-text">
+
+Eu, L, Fiquei pensando no que aconteceu na cozinha a noite inteira. E então, enquanto eu estava na cama esperando ele para nós dormirmos de conchinha, eu me lembrei que faz tempo que Light Yagami fica no banheiro por cerca de duas horas e depois vai embora ... Eu vou la averiguar.
+
+Após chegar perto da porta eu ouvi ele sussurrando um nome e som que parecia "Fap fap fap fap". Mas ao olhar de perto so vi ele escrevendo no caderno enquanto sussurava um nome.
+
+  </div>
+
+  <div
+    class="character-options"
+    style="margin-top:2rem;">
+
+    <button
+      onclick="wrongBathroom('arrombar')">
+
+      Arrombar a porta e confrontar ele.
+
+    </button>
+
+    <button
+      onclick="wrongBathroom('dormir')">
+
+      Ir dormir
+
+    </button>
+
+    <button
+      onclick="correctBathroom()">
+
+      Voltar ao quarto, esperar ele sair do banheiro e seguir ele.
+
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     RESULTADO BANHEIRO
+========================================================= -->
+
+<section
+  class="scene blackout"
+  id="scene-bathroom-result">
+
+  <div
+    class="story-text red"
+    id="bathroom-result-text">
+  </div>
+
+  <button
+    class="story-button"
+    id="bathroom-result-button"
+    onclick="returnToStoryStart()"
+    style="display:none;">
+
+    Retornar para o inicio
+
+  </button>
+
+</section>
+
+
+<!-- =========================================================
+     HISTÓRIA 3
+========================================================= -->
+
+<section
+  class="scene"
+  id="scene-story3">
+
+  <div class="story-text">
+
+A noite fria, andava pelos becos seguindo Light Yagami ... Ou também ... Kira. A seguir os passos dele, fui levada até a casa de Mikami, UM AMIGO DELE !???!
+
+Ao entrar na casa pela porta dos fundos, fui levada até o andar de cima. Surpresa ao escutar barulho de movimento corporal e o cheiro de suor eu arrombei a porta e vi a cena de Mikami e Light Yagami compartilhando o caderno e escrevendo nomes neles como se eles fossem dois doidos balançando de um lado pro outro enquanto gritavam "DELETAR!"
+
+  </div>
+
+  <div
+    class="character-options"
+    style="margin-top:2rem;">
+
+    <button
+      onclick="wrongMikami('brincadeira')">
+
+      Entrar na brincadeira deles.
+
+    </button>
+
+    <button
+      onclick="correctMikami()">
+
+      Escrever o nome do Mikami
+
+    </button>
+
+    <button
+      onclick="wrongMikami('dois')">
+
+      Escrever o nome dos dois
+
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     RESULTADO MIKAMI
+========================================================= -->
+
+<section
+  class="scene blackout"
+  id="scene-mikami-result">
+
+  <div
+    class="story-text red"
+    id="mikami-result-text">
+  </div>
+
+  <button
+    class="story-button"
+    id="mikami-result-button"
+    onclick="returnToStoryStart()"
+    style="display:none;">
+
+    Retornar para o inicio
+
+  </button>
+
+</section>
+
+
+<!-- =========================================================
+     LIGHT EXPLICA
+========================================================= -->
+
+<section
+  class="scene blackout"
+  id="scene-light">
+
+  <div class="story-text">
+
+Light Yagami veio até mim, me beijou e disse:
+
+- L, Muito obrigado ... Mikami estava usando uma magia para me deixar manipulado ... E quando eu te empurrei aquele era meu único momento consciente, se eu te falasse que tinha algo errado ele mataria nossa família, então ao te empurrar, eu sabia que você notaria que tinha algo de errado
+
+  </div>
+
+  <button
+    class="story-button"
+    onclick="showDeclaration()">
+
+    Prosseguir
+
+  </button>
+
+</section>
+
+
+<!-- =========================================================
+     DECLARAÇÃO
+========================================================= -->
+
+<section
+  class="scene declaration"
+  id="scene-declaration">
+
+  <div class="declaration-text">
+
+Agora, pra você, Rafa, Minha Lerdona. Acho que essa foi sem duvidas a coisa mais épica que eu fiz para alguém, nunca tive toda essa paciência para fazer algo assim para alguém, mas quero que você se sinta especial igual você realmente é para mim.
+
+Por você, to fazendo essa coisa a um bom tempo, meus dedos já estão cansados de escrever, apagar, escrever mais e apagar mais. É como se fosse um ciclo repetitivo ... Ciclos é uma boa palavra, igual mesmo o que meu coração tem com você, mas é um ciclo tão simples que chega a ser besta a maneira como o ciclo mais importante do meu coração é simples, que só consiste em te amar mais do que o dia anterior assim que eu acordo.
+
+Eu gastei todo o vigor do meu cérebro para fazer essa historinha boba pra entreter você, e isso, é sem duvidas uma previa do que eu estou disposto a fazer por você, te entreter ate mesmo quando eu estiver cansado ou com dor nas costas de tanto ficar torto escrevendo um código em HTML pra você ksksksksks.
+
+Não sei se um dia vou conhecer alguém tão especial como você, mas sinceramente, também não me importo em conhecer outro alguém, desde que a gente se conheceu você tem sido a pessoa mais especial pra mim, a pessoa que eu mais converso, a pessoa que eu mais amo, a pessoa que eu mais me importo, a pessoa que tem meu coração.
+
+Já nem mesmo sei o que fazer sem você.
+
+E é mediante a esse medo que eu decido eu mesmo, não querer te perder nunca, por isso, caso você tenha lido esse texto todo saberá que isso é uma declaração, mas, em conjunto, eu quero te perguntar Rafaella, se você aceita namorar comigo.
+
+Se sim, aperte na palavra
+
+<button
+  class="fake-link"
+  onclick="acceptLove()">
+
+  sim
+
+</button>.
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     TELA DA ALIANÇA
+========================================================= -->
+
+<section
+  class="scene alliance-scene"
+  id="scene-alliance">
+
+  <div class="alliance-title">
+
+Ok, eu sabia que voce iria aceitar meu presentinho hihi. Espero que nossa alianca seja eterna, que ela seja infinita até mesmo em ausencia de tempo, porque como eu disse no texto anterior, ja nao sei viver sem voce. Então eu espero que nos dois duremos mais que todos os outros casais
+
+  </div>
+
+  <button
+    class="ring-button"
+    id="ringButton"
+    onclick="pressAlliance()">
+
+    💍
+
+  </button>
+
+  <div class="ring-hint">
+
+    (Aperte na alianca para colocar ela em seu dedo)
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     FINAL ALIANÇA
+========================================================= -->
+
+<section
+  class="scene final-alliance"
+  id="scene-final-alliance">
+
+  <div class="final-alliance-text">
+
+    Isso, agora oficialmente estamos juntos e conectados,
+    agora, um pertence ao outro. Eu te amo.
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
 
 <script>
 
+
 /* =========================================================
-   MÚSICA PRINCIPAL
+   ÁUDIOS
 ========================================================= */
 
-const themeMusic = document.getElementById('themeMusic');
+const themeMusic =
+  document.getElementById("themeMusic");
+
+const kissMusic =
+  document.getElementById("kissMusic");
+
+const purpleRain =
+  document.getElementById("purpleRain");
+
 
 function playTheme(){
-  themeMusic.volume = 0.55;
 
-  const promise = themeMusic.play();
+  themeMusic.volume = .55;
 
-  if(promise !== undefined){
-    promise.catch(() => {
-      /* navegador bloqueou autoplay */
-    });
+  const promise =
+    themeMusic.play();
+
+  if(promise){
+
+    promise.catch(()=>{});
+
   }
+
 }
 
-document.addEventListener('click', function(){
-  if(themeMusic.paused){
-    playTheme();
+
+/*
+   O tema só começa depois de uma interação
+   do usuário, evitando bloqueio do navegador.
+*/
+
+document.addEventListener(
+  "click",
+  function(){
+
+    if(
+      themeMusic.paused &&
+      purpleRain.paused
+    ){
+
+      playTheme();
+
+    }
+
   }
-}, {once:false});
+);
 
 
 /* =========================================================
-   SOM DO GIF — kiss.mp3
+   TROCA DE CENAS
 ========================================================= */
 
-const kissSound = document.getElementById('kissSound');
+function goTo(id){
 
-function playKissSound(){
+  document
+    .querySelectorAll(".scene")
+    .forEach(scene => {
 
-  kissSound.currentTime = 0;
-  kissSound.volume = 0.8;
+      scene.classList.remove("active");
 
-  const promise = kissSound.play();
-
-  if(promise !== undefined){
-    promise.catch(() => {
-      console.log('O navegador bloqueou a reprodução do kiss.mp3.');
     });
-  }
-}
-
-function stopKissSound(){
-
-  kissSound.pause();
-  kissSound.currentTime = 0;
-
-}
 
 
-/* =========================================================
-   LEITURA DO IP
-========================================================= */
-
-let visitorIP = 'Não identificado';
-let quizCompleted = false;
-
-async function readIP(){
-
-  try{
-
-    const response = await fetch(
-      'https://api.ipify.org?format=json'
+  const target =
+    document.getElementById(
+      "scene-" + id
     );
 
-    if(!response.ok){
-      throw new Error('Não foi possível obter o IP.');
-    }
 
-    const data = await response.json();
+  if(target){
 
-    if(data.ip){
-
-      visitorIP = data.ip;
-
-      localStorage.setItem(
-        'quizVisitorIP',
-        visitorIP
-      );
-
-    }
-
-  }catch(error){
-
-    const savedIP =
-      localStorage.getItem('quizVisitorIP');
-
-    if(savedIP){
-      visitorIP = savedIP;
-    }
+    target.classList.add("active");
 
   }
 
 }
 
-readIP();
+
+/* =========================================================
+   CAPA
+========================================================= */
+
+let notebookOpened = false;
+
+
+function openNotebook(){
+
+  if(notebookOpened)
+    return;
+
+
+  notebookOpened = true;
+
+  playTheme();
+
+  goTo("rules");
+
+}
 
 
 /* =========================================================
@@ -721,103 +1693,107 @@ readIP();
 const quizData = [
 
   {
-    eyebrow: "Julgamento do Caderno",
+    eyebrow:"Julgamento do Caderno",
 
     question:
       "Como o Felipe e a Rafaella se conheceram?",
 
-    options: [
+    options:[
       "Ela respondeu um story dele elogiando a roupa",
       "Eles se esbarraram numa convenção de anime",
       "Foi um match de aplicativo de namoro"
     ],
 
-    correct: 0,
+    correct:0,
 
     feedback:
-      "Certo. Ela mandou \"melhor que os chungas\" e o Felipe, com toda elegância, achou que era outra pessoa respondendo.",
+      'Certo. Ela mandou "melhor que os chungas" e o Felipe, com toda elegância, achou que era outra pessoa respondendo.',
 
-    wrongFeedbacks: {
-      1: "Alem de burra<br>é mentirosa.",
-      2: "Senhor. Tem momentos que sua burrice ultrapassa o meu esperado"
+    wrongFeedbacks:{
+      1:"Além de burra<br>é mentirosa.",
+      2:"Senhor. Tem momentos que sua burrice ultrapassa o meu esperado"
     }
   },
 
+
   {
-    eyebrow: "Julgamento do Caderno",
+    eyebrow:"Julgamento do Caderno",
 
     question:
       "Qual é o apelido oficial e definitivo da Rafaella?",
 
-    options: [
+    options:[
       "Muichiro Tokito",
       "Lerdona",
       "L"
     ],
 
-    correct: 1,
+    correct:1,
 
     feedback:
       "Óbvio. Título conquistado com muito mérito e nenhuma pressa.",
 
-    wrongFeedbacks: {
-      0: "Jurou demais né querida.",
-      2: "Taquiopariu, jura mais."
+    wrongFeedbacks:{
+      0:"Jurou demais né querida.",
+      2:"Taquiopariu, jura mais."
     }
   },
 
+
   {
-    eyebrow: "Julgamento do Caderno",
+    eyebrow:"Julgamento do Caderno",
 
     question:
       "Qual é o anime favorito dos dois?",
 
-    options: [
+    options:[
       "Attack on Titan",
       "Naruto",
       "Death Note"
     ],
 
-    correct: 2,
+    correct:2,
 
     feedback:
       "Isso mesmo — com Demon Slayer logo atrás, sempre no pódio.",
 
-    wrongFeedbacks: {
-      0: "De gigante já basta o meu.",
-      1: "Não tenho trocadilho pra isso então sei la."
+    wrongFeedbacks:{
+      0:"De gigante já basta o meu.",
+      1:"Não tenho trocadilho pra isso então sei la."
     }
   },
 
+
   {
-    eyebrow: "Julgamento do Caderno",
+    eyebrow:"Julgamento do Caderno",
 
     question:
       "Quanto é 8 x 7?",
 
-    options: [
+    options:[
       "54",
       "56",
       "58"
     ],
 
-    correct: 1,
+    correct:1,
 
-    instantAdvance: true,
+    instantAdvance:true,
 
     feedback:
-      "Perdão, tipo de pergunta errada."
+      "Epa, desculpa. Essa pergunta não é adequada ao quiz"
   },
 
+
   {
-    eyebrow: "Julgamento do Caderno",
+    eyebrow:"Julgamento do Caderno",
 
     question:
       "Quantos filhos nós teremos?",
 
-    freeText: true,
+    freeText:true,
 
-    correctNumber: 2,
+    correctNumber:2,
 
     feedback:
       "Isso. Dois é o número certo.",
@@ -829,53 +1805,34 @@ const quizData = [
       "Eita papai, ixtourei."
   },
 
+
   {
-    eyebrow: "Julgamento do Caderno",
+    eyebrow:"Julgamento do Caderno",
 
     question:
       "Qual o MEU Death Note?",
 
-    options: [
+    options:[
       "Death Note normal ué",
       "Plug Note",
       "Incesto Note"
     ],
 
-    correct: 1,
+    correct:1,
 
     feedback:
       "Isso mesmo. Plug Note.",
 
-    wrongFeedbacks: {
-      0: "Usa seu cérebro pelo menos uma vez.",
-      2: "Linha de pensamento quase correta, bom trabalho."
+    wrongFeedbacks:{
+      0:"Usa seu cérebro pelo menos uma vez.",
+      2:"Linha de pensamento quase correta, bom trabalho."
     }
   }
 
 ];
 
+
 let qIndex = 0;
-
-
-/* =========================================================
-   NAVEGAÇÃO ENTRE CENAS
-========================================================= */
-
-function goTo(id){
-
-  document
-    .querySelectorAll('.scene')
-    .forEach(s => s.classList.remove('active'));
-
-  document
-    .getElementById('scene-' + id)
-    .classList.add('active');
-
-  if(id === 'final'){
-    finishQuiz();
-  }
-
-}
 
 
 /* =========================================================
@@ -885,122 +1842,12 @@ function goTo(id){
 function startQuiz(){
 
   qIndex = 0;
-  quizCompleted = false;
 
-  goTo('quiz');
+  goTo("quiz");
 
   renderQuestion();
 
 }
-
-
-/* =========================================================
-   GIF DE RECOMPENSA + kiss.mp3
-========================================================= */
-
-function showReward(){
-
-  // Mostra o GIF
-  goTo('gif');
-
-  // Começa o kiss.mp3 exatamente quando o GIF aparece
-  playKissSound();
-
-  // O GIF/som ficam na tela por 4 segundos
-  setTimeout(() => {
-
-    // Para o som antes de ir para a próxima cena
-    stopKissSound();
-
-    // Vai para a pergunta final
-    goTo('reveal');
-
-  }, 4000);
-
-}
-
-
-/* =========================================================
-   BLACKOUT
-========================================================= */
-
-function showBlackout(text){
-
-  document
-    .getElementById('blackout-text')
-    .textContent = text;
-
-  goTo('blackout');
-
-  setTimeout(() => {
-
-    qIndex++;
-
-    if(qIndex < quizData.length){
-
-      goTo('quiz');
-      renderQuestion();
-
-    }else{
-
-      quizCompleted = true;
-
-      localStorage.setItem(
-        'quizCompleted',
-        'true'
-      );
-
-      localStorage.setItem(
-        'quizCompletedAt',
-        new Date().toISOString()
-      );
-
-      showReward();
-
-    }
-
-  }, 5000);
-
-}
-
-
-/* =========================================================
-   ABRIR NOTEBOOK
-========================================================= */
-
-let notebookOpened = false;
-
-function openNotebook(){
-
-  if(notebookOpened) return;
-
-  notebookOpened = true;
-
-  playTheme();
-
-  goTo('rules');
-
-}
-
-const notebookEl =
-  document.getElementById('notebook');
-
-notebookEl.addEventListener(
-  'click',
-  openNotebook
-);
-
-notebookEl.addEventListener(
-  'touchend',
-  function(e){
-
-    e.preventDefault();
-
-    openNotebook();
-
-  },
-  {passive:false}
-);
 
 
 /* =========================================================
@@ -1009,136 +1856,372 @@ notebookEl.addEventListener(
 
 function renderQuestion(){
 
-  const data = quizData[qIndex];
+  const data =
+    quizData[qIndex];
 
-  document
-    .getElementById('quiz-eyebrow')
-    .textContent = data.eyebrow;
 
-  document
-    .getElementById('quiz-question')
-    .textContent = data.question;
+  document.getElementById(
+    "quiz-eyebrow"
+  ).textContent =
+    data.eyebrow;
 
-  document
-    .getElementById('progress')
-    .style.width =
-      (qIndex / quizData.length * 100) + '%';
+
+  document.getElementById(
+    "quiz-question"
+  ).textContent =
+    data.question;
+
+
+  document.getElementById(
+    "progress"
+  ).style.width =
+    (qIndex / quizData.length * 100)
+    + "%";
 
 
   const feedback =
-    document.getElementById('quiz-feedback');
+    document.getElementById(
+      "quiz-feedback"
+    );
 
-  feedback.innerHTML = '';
 
-  feedback.classList.remove('yellow');
+  feedback.innerHTML = "";
+
+  feedback.classList.remove(
+    "yellow"
+  );
 
 
   const optsWrap =
-    document.getElementById('quiz-options');
+    document.getElementById(
+      "quiz-options"
+    );
 
-  optsWrap.innerHTML = '';
 
+  optsWrap.innerHTML = "";
+
+
+  /* =======================================================
+     RESPOSTA LIVRE
+  ======================================================= */
 
   if(data.freeText){
 
     const input =
-      document.createElement('input');
+      document.createElement(
+        "input"
+      );
 
-    input.type = 'text';
 
-    input.className = 'text-answer';
+    input.type = "text";
+
+    input.className =
+      "text-answer";
 
     input.placeholder =
-      'Escreva sua resposta...';
+      "Escreva sua resposta...";
 
-    input.id = 'freeTextInput';
+    input.id =
+      "freeTextInput";
 
 
     const submitBtn =
-      document.createElement('button');
+      document.createElement(
+        "button"
+      );
+
 
     submitBtn.className =
-      'opt submit-answer';
+      "opt";
 
     submitBtn.textContent =
-      'Responder';
+      "Responder";
 
 
-    const submit = () =>
+    const submit = () => {
+
       submitFreeText(
         input.value,
         submitBtn,
         input
       );
 
+    };
 
-    submitBtn.onclick = submit;
+
+    submitBtn.onclick =
+      submit;
 
 
     input.addEventListener(
-      'keydown',
-      (e) => {
+      "keydown",
+      e => {
 
-        if(e.key === 'Enter'){
+        if(e.key === "Enter"){
+
           submit();
+
         }
 
       }
     );
 
 
-    optsWrap.appendChild(input);
-    optsWrap.appendChild(submitBtn);
+    optsWrap.appendChild(
+      input
+    );
+
+    optsWrap.appendChild(
+      submitBtn
+    );
+
 
     return;
 
   }
 
 
-  data.options.forEach((opt, i) => {
+  /* =======================================================
+     OPÇÕES
+  ======================================================= */
 
-    const btn =
-      document.createElement('button');
+  data.options.forEach(
+    (opt,index) => {
 
-    btn.className = 'opt';
+      const btn =
+        document.createElement(
+          "button"
+        );
 
-    btn.textContent = opt;
 
-    btn.onclick =
-      () => selectAnswer(i, btn);
+      btn.className =
+        "opt";
 
-    optsWrap.appendChild(btn);
 
-  });
+      btn.textContent =
+        opt;
+
+
+      btn.onclick =
+        () => selectAnswer(
+          index,
+          btn
+        );
+
+
+      optsWrap.appendChild(
+        btn
+      );
+
+    }
+  );
 
 }
 
 
 /* =========================================================
-   RESPOSTA LIVRE
+   SELECIONAR RESPOSTA
+========================================================= */
+
+function selectAnswer(
+  i,
+  btnEl
+){
+
+  const data =
+    quizData[qIndex];
+
+
+  const feedback =
+    document.getElementById(
+      "quiz-feedback"
+    );
+
+
+  /* =======================================================
+     MATEMÁTICA
+  ======================================================= */
+
+  if(data.instantAdvance){
+
+    document
+      .querySelectorAll(".opt")
+      .forEach(btn => {
+
+        btn.style.pointerEvents =
+          "none";
+
+      });
+
+
+    btnEl.classList.add(
+
+      i === data.correct
+        ? "correct"
+        : "wrong"
+
+    );
+
+
+    showMathBlackout();
+
+    return;
+
+  }
+
+
+  /* =======================================================
+     ERRADA
+  ======================================================= */
+
+  if(i !== data.correct){
+
+    btnEl.classList.add(
+      "wrong"
+    );
+
+
+    btnEl.style.pointerEvents =
+      "none";
+
+
+    if(
+      data.wrongFeedbacks &&
+      data.wrongFeedbacks[i]
+    ){
+
+      feedback.innerHTML =
+        data.wrongFeedbacks[i];
+
+      feedback.classList.add(
+        "yellow"
+      );
+
+    }
+    else{
+
+      feedback.textContent =
+        "Errou. Que surpresa. Tenta de novo, lerdona.";
+
+    }
+
+
+    return;
+
+  }
+
+
+  /* =======================================================
+     CERTA
+  ======================================================= */
+
+  document
+    .querySelectorAll(".opt")
+    .forEach(btn => {
+
+      btn.style.pointerEvents =
+        "none";
+
+    });
+
+
+  btnEl.classList.add(
+    "correct"
+  );
+
+
+  feedback.textContent =
+    data.feedback;
+
+
+  document.getElementById(
+    "progress"
+  ).style.width =
+    ((qIndex + 1) /
+      quizData.length * 100)
+    + "%";
+
+
+  setTimeout(() => {
+
+    qIndex++;
+
+
+    if(
+      qIndex <
+      quizData.length
+    ){
+
+      renderQuestion();
+
+    }
+    else{
+
+      showReward();
+
+    }
+
+  },1400);
+
+}
+
+
+/* =========================================================
+   MATEMÁTICA
+========================================================= */
+
+function showMathBlackout(){
+
+  goTo("blackout");
+
+
+  document.getElementById(
+    "blackout-text"
+  ).textContent =
+    "Epa, desculpa. Essa pergunta não é adequada ao quiz";
+
+
+  setTimeout(() => {
+
+    qIndex++;
+
+    renderQuestion();
+
+    goTo("quiz");
+
+  },2500);
+
+}
+
+
+/* =========================================================
+   RESPOSTA NUMÉRICA
 ========================================================= */
 
 function submitFreeText(
-  rawValue,
-  btnEl,
-  inputEl
+  raw,
+  btn,
+  input
 ){
 
-  const data = quizData[qIndex];
+  const data =
+    quizData[qIndex];
+
 
   const feedback =
-    document.getElementById('quiz-feedback');
+    document.getElementById(
+      "quiz-feedback"
+    );
 
-  const value =
-    rawValue.trim();
 
   const num =
-    parseInt(value, 10);
+    parseInt(
+      raw.trim(),
+      10
+    );
 
 
   if(isNaN(num)){
-
-    feedback.classList.remove('yellow');
 
     feedback.textContent =
       "Isso não é um número válido, tenta de novo.";
@@ -1148,9 +2231,10 @@ function submitFreeText(
   }
 
 
-  if(num !== data.correctNumber){
-
-    feedback.classList.remove('yellow');
+  if(
+    num !==
+    data.correctNumber
+  ){
 
     feedback.textContent =
       num > data.correctNumber
@@ -1162,220 +2246,655 @@ function submitFreeText(
   }
 
 
-  inputEl.disabled = true;
+  input.disabled = true;
 
-  btnEl.disabled = true;
+  btn.disabled = true;
 
-  btnEl.style.pointerEvents =
-    'none';
-
-
-  feedback.classList.remove('yellow');
 
   feedback.textContent =
     data.feedback;
 
 
-  document
-    .getElementById('progress')
-    .style.width =
-      ((qIndex + 1) /
-      quizData.length * 100) + '%';
+  document.getElementById(
+    "progress"
+  ).style.width =
+    ((qIndex + 1) /
+      quizData.length * 100)
+    + "%";
 
 
   setTimeout(() => {
 
     qIndex++;
 
-    if(qIndex < quizData.length){
+
+    if(
+      qIndex <
+      quizData.length
+    ){
 
       renderQuestion();
 
-    }else{
-
-      quizCompleted = true;
-
-      localStorage.setItem(
-        'quizCompleted',
-        'true'
-      );
-
-      localStorage.setItem(
-        'quizCompletedAt',
-        new Date().toISOString()
-      );
+    }
+    else{
 
       showReward();
 
     }
 
-  }, 1400);
+  },1400);
 
 }
 
 
 /* =========================================================
-   RESPOSTAS DO QUIZ
+   GIF + KISS
 ========================================================= */
 
-function selectAnswer(i, btnEl){
+function showReward(){
 
-  const data =
-    quizData[qIndex];
+  goTo("gif");
+
+
+  /*
+    Pausa apenas o tema.
+
+    O Kiss toca durante o GIF.
+  */
+
+  themeMusic.pause();
+
+  kissMusic.currentTime = 0;
+
+  kissMusic.volume = .7;
+
+  kissMusic.play().catch(() => {});
+
+
+  setTimeout(() => {
+
+    kissMusic.pause();
+
+    kissMusic.currentTime = 0;
+
+    goTo("challenge");
+
+  },5000);
+
+}
+
+
+/* =========================================================
+   DESAFIO
+========================================================= */
+
+function showCharacters(){
+
+  goTo("characters");
+
+}
+
+
+/* =========================================================
+   PERSONAGEM
+========================================================= */
+
+function wrongCharacter(type){
 
   const feedback =
-    document.getElementById('quiz-feedback');
-
-
-  if(data.instantAdvance){
-
-    document
-      .querySelectorAll('.opt')
-      .forEach(
-        b => b.style.pointerEvents = 'none'
-      );
-
-
-    btnEl.classList.add(
-      i === data.correct
-        ? 'correct'
-        : 'wrong'
+    document.getElementById(
+      "character-feedback"
     );
 
 
-    showBlackout(data.feedback);
+  feedback.classList.add(
+    "yellow"
+  );
 
-    return;
+
+  if(type === "kira"){
+
+    feedback.textContent =
+      "Perdão, eu sou este.";
 
   }
 
 
-  if(i !== data.correct){
+  else if(type === "mikami"){
 
-    btnEl.classList.add('wrong');
-
-    btnEl.style.pointerEvents =
-      'none';
-
-
-    if(
-      data.wrongFeedbacks &&
-      data.wrongFeedbacks[i]
-    ){
-
-      feedback.innerHTML =
-        data.wrongFeedbacks[i];
-
-
-      if(
-        qIndex === 0 ||
-        qIndex === 2 ||
-        qIndex === 5
-      ){
-
-        feedback.classList.add(
-          'yellow'
-        );
-
-      }
-
-    }else{
-
-      feedback.textContent =
-        "Errou. Que surpresa. Tenta de novo, lerdona.";
-
-    }
-
-    return;
+    feedback.textContent =
+      "Perdão, eu sou este.";
 
   }
 
 
-  document
-    .querySelectorAll('.opt')
-    .forEach(
-      b => b.style.pointerEvents = 'none'
+  else if(type === "muichiro"){
+
+    feedback.textContent =
+      "Eita, perdão. Esse personagem nem de Death note é.";
+
+  }
+
+}
+
+
+function correctCharacter(){
+
+  goTo("story1");
+
+}
+
+
+/* =========================================================
+   HISTÓRIA 1
+========================================================= */
+
+function showKitchen(){
+
+  goTo("kitchen");
+
+}
+
+
+/* =========================================================
+   COZINHA
+========================================================= */
+
+function wrongKitchen(type){
+
+  const result =
+    document.getElementById(
+      "kitchen-result-text"
     );
 
 
-  btnEl.classList.add('correct');
-
-  feedback.classList.remove('yellow');
-
-  feedback.textContent =
-    data.feedback;
+  const button =
+    document.getElementById(
+      "kitchen-result-button"
+    );
 
 
-  document
-    .getElementById('progress')
-    .style.width =
-      ((qIndex + 1) /
-      quizData.length * 100) + '%';
+  result.classList.add(
+    "red"
+  );
 
+
+  if(type === "abracar"){
+
+    result.textContent =
+      "Ele foi embora da cozinha depois de te empurrar no chão";
+
+  }
+
+
+  if(type === "amelie"){
+
+    result.textContent =
+      "Light Yagami retornou a sala de estar, viu Amelie morta e beijou voce. Mas esse é o final ruim e eu não gosto de finais ruins!!";
+
+  }
+
+
+  button.textContent =
+    "Retornar para o inicio";
+
+
+  button.style.display =
+    "block";
+
+
+  button.onclick =
+    returnToStoryStart;
+
+
+  goTo("kitchen-result");
+
+}
+
+
+/* =========================================================
+   COZINHA CERTA
+========================================================= */
+
+function correctKitchen(){
+
+  const result =
+    document.getElementById(
+      "kitchen-result-text"
+    );
+
+
+  const button =
+    document.getElementById(
+      "kitchen-result-button"
+    );
+
+
+  result.classList.remove(
+    "red"
+  );
+
+
+  result.textContent =
+    "Ele foi embora da cozinha depois de te empurrar no chão";
+
+
+  button.textContent =
+    "Prosseguir";
+
+
+  button.style.display =
+    "block";
+
+
+  button.onclick = () => {
+
+    goTo("story2");
+
+  };
+
+
+  goTo("kitchen-result");
+
+}
+
+
+/* =========================================================
+   VOLTAR AO COMEÇO
+========================================================= */
+
+function returnToStoryStart(){
+
+  goTo("characters");
+
+}
+
+
+/* =========================================================
+   BANHEIRO
+========================================================= */
+
+function wrongBathroom(type){
+
+  const result =
+    document.getElementById(
+      "bathroom-result-text"
+    );
+
+
+  const button =
+    document.getElementById(
+      "bathroom-result-button"
+    );
+
+
+  result.classList.add(
+    "red"
+  );
+
+
+  if(type === "arrombar"){
+
+    result.textContent =
+      "Voce arrombou a porta e confrontou ele, porém, ele escreveu seu nome e da sua filha. Voces duas morreram";
+
+  }
+
+
+  if(type === "dormir"){
+
+    result.textContent =
+      "Ohhh, segue a droga da historia L.";
+
+  }
+
+
+  button.textContent =
+    "Retornar para o inicio";
+
+
+  button.style.display =
+    "block";
+
+
+  button.onclick =
+    returnToStoryStart;
+
+
+  goTo("bathroom-result");
+
+}
+
+
+/* =========================================================
+   BANHEIRO CERTA
+========================================================= */
+
+function correctBathroom(){
+
+  const result =
+    document.getElementById(
+      "bathroom-result-text"
+    );
+
+
+  const button =
+    document.getElementById(
+      "bathroom-result-button"
+    );
+
+
+  result.classList.remove(
+    "red"
+  );
+
+
+  result.textContent =
+    "Voce retornou ao quarto, e quando ouviu ele saindo, o seguiu.";
+
+
+  button.textContent =
+    "Prosseguir";
+
+
+  button.style.display =
+    "block";
+
+
+  button.onclick = () => {
+
+    goTo("story3");
+
+  };
+
+
+  goTo("bathroom-result");
+
+}
+
+
+/* =========================================================
+   MIKAMI
+========================================================= */
+
+function wrongMikami(type){
+
+  const result =
+    document.getElementById(
+      "mikami-result-text"
+    );
+
+
+  const button =
+    document.getElementById(
+      "mikami-result-button"
+    );
+
+
+  result.classList.add(
+    "red"
+  );
+
+
+  if(type === "brincadeira"){
+
+    result.textContent =
+      "Eles não gostaram da sua tentativa e mataram voce";
+
+  }
+
+
+  if(type === "dois"){
+
+    result.textContent =
+      "Voce matou os dois, mas nao era pra ter me matado ne mano.";
+
+  }
+
+
+  button.textContent =
+    "Retornar para o inicio";
+
+
+  button.style.display =
+    "block";
+
+
+  button.onclick =
+    returnToStoryStart;
+
+
+  goTo("mikami-result");
+
+}
+
+
+/* =========================================================
+   MIKAMI CERTA
+========================================================= */
+
+function correctMikami(){
+
+  const result =
+    document.getElementById(
+      "mikami-result-text"
+    );
+
+
+  const button =
+    document.getElementById(
+      "mikami-result-button"
+    );
+
+
+  result.classList.remove(
+    "red"
+  );
+
+
+  result.textContent =
+    "";
+
+
+  button.textContent =
+    "Prosseguir";
+
+
+  button.style.display =
+    "block";
+
+
+  button.onclick = () => {
+
+    goTo("light");
+
+  };
+
+
+  goTo("mikami-result");
+
+}
+
+
+/* =========================================================
+   DECLARAÇÃO
+========================================================= */
+
+function showDeclaration(){
+
+  /*
+    Para as músicas anteriores.
+
+    Purple Rain começa aqui.
+  */
+
+  kissMusic.pause();
+
+  kissMusic.currentTime = 0;
+
+  themeMusic.pause();
+
+  themeMusic.currentTime = 0;
+
+
+  purpleRain.currentTime = 0;
+
+  purpleRain.volume = .55;
+
+
+  /*
+    IMPORTANTE:
+    a reprodução acontece depois
+    do clique no botão "Prosseguir",
+    então o navegador normalmente permite.
+  */
+
+  purpleRain
+    .play()
+    .catch(() => {});
+
+
+  goTo("declaration");
+
+}
+
+
+/* =========================================================
+   BOTÃO "SIM"
+========================================================= */
+
+function acceptLove(){
+
+  /*
+    NÃO damos pause na Purple Rain.
+
+    Ela continua tocando na tela da aliança
+    e continuará tocando na tela final.
+  */
+
+  goTo("alliance");
+
+}
+
+
+/* =========================================================
+   ALIANÇA
+========================================================= */
+
+function pressAlliance(){
+
+  const ring =
+    document.getElementById(
+      "ringButton"
+    );
+
+
+  /*
+    Evita apertar várias vezes.
+  */
+
+  ring.disabled = true;
+
+
+  /*
+    Faz a aliança desaparecer.
+  */
+
+  ring.style.transition =
+    "opacity .6s ease, transform .6s ease";
+
+
+  ring.style.opacity =
+    "0";
+
+
+  ring.style.transform =
+    "scale(0.2)";
+
+
+  /*
+    Notificação do navegador.
+  */
+
+  sendAllianceNotification();
+
+
+  /*
+    Depois da animação,
+    vai para a tela final.
+  */
 
   setTimeout(() => {
 
-    qIndex++;
+    goTo("final-alliance");
 
-    if(qIndex < quizData.length){
-
-      renderQuestion();
-
-    }else{
-
-      quizCompleted = true;
-
-      localStorage.setItem(
-        'quizCompleted',
-        'true'
-      );
-
-      localStorage.setItem(
-        'quizCompletedAt',
-        new Date().toISOString()
-      );
-
-      showReward();
-
-    }
-
-  }, 1400);
+  },700);
 
 }
 
 
 /* =========================================================
-   FINAL DO QUIZ
+   NOTIFICAÇÃO
 ========================================================= */
 
-function finishQuiz(){
+function sendAllianceNotification(){
 
-  const ipDisplay =
-    document.getElementById('ipDisplay');
-
-  const savedIP =
-    localStorage.getItem('quizVisitorIP');
-
-
-  if(savedIP){
-    visitorIP = savedIP;
-  }
-
+  /*
+    Alguns navegadores não suportam
+    Notification API.
+  */
 
   if(
-    visitorIP !==
-    'Não identificado'
+    !("Notification" in window)
   ){
 
-    ipDisplay.innerHTML =
-      'IP registrado nesta sessão: <strong>' +
-      visitorIP +
-      '</strong>';
+    return;
 
-  }else{
+  }
 
-    ipDisplay.textContent =
-      'Quiz concluído. IP não pôde ser identificado.';
+
+  /*
+    Se já existe permissão,
+    mostra imediatamente.
+  */
+
+  if(
+    Notification.permission ===
+    "granted"
+  ){
+
+    createAllianceNotification();
+
+    return;
+
+  }
+
+
+  /*
+    Se ainda não foi perguntado,
+    pede permissão.
+  */
+
+  if(
+    Notification.permission ===
+    "default"
+  ){
+
+    Notification
+      .requestPermission()
+      .then(permission => {
+
+        if(
+          permission ===
+          "granted"
+        ){
+
+          createAllianceNotification();
+
+        }
+
+      })
+      .catch(() => {});
 
   }
 
@@ -1383,188 +2902,34 @@ function finishQuiz(){
 
 
 /* =========================================================
-   BOTÃO "DEIXA EU PENSAR" — FOGE
+   CRIAR NOTIFICAÇÃO
 ========================================================= */
 
-const noBtn =
-  document.getElementById('btn-no');
+function createAllianceNotification(){
 
-const btnRow =
-  noBtn.parentElement;
+  try{
 
-let dodges = 0;
-
-let noPos = {
-  x: 0,
-  y: 0
-};
-
-
-noBtn.style.position =
-  'relative';
-
-noBtn.style.left =
-  '0px';
-
-noBtn.style.top =
-  '0px';
-
-
-function randomDodgeTarget(){
-
-  const margin = 20;
-
-  const w =
-    noBtn.offsetWidth;
-
-  const spanX =
-    Math.max(
-      window.innerWidth -
-      w -
-      margin * 2,
-      200
+    new Notification(
+      "💍 Aliança colocada!",
+      {
+        body:
+          "Agora oficialmente estamos juntos e conectados. Eu te amo.",
+        icon:
+          "reward.gif"
+      }
     );
 
-  const spanY =
-    Math.max(
-      window.innerHeight * 0.5,
-      160
+  }
+  catch(error){
+
+    console.log(
+      "Não foi possível criar a notificação.",
+      error
     );
 
-
-  const targetX =
-    (Math.random() - 0.5) *
-    spanX;
-
-  const targetY =
-    (Math.random() - 0.5) *
-    spanY;
-
-
-  return {
-    x: targetX,
-    y: targetY
-  };
-
-}
-
-
-function dodge(){
-
-  noPos =
-    randomDodgeTarget();
-
-
-  noBtn.style.transform =
-    `translate(${noPos.x}px, ${noPos.y}px)`;
-
-
-  dodges++;
-
-
-  if(dodges === 3){
-
-    noBtn.textContent =
-      "para de tentar";
-
-  }
-
-  else if(dodges === 8){
-
-    noBtn.textContent =
-      "sério, desiste";
-
-  }
-
-  else if(dodges > 14){
-
-    noBtn.textContent =
-      "😤";
-
   }
 
 }
-
-
-function distToBtn(
-  clientX,
-  clientY
-){
-
-  const rect =
-    noBtn.getBoundingClientRect();
-
-  const cx =
-    rect.left +
-    rect.width / 2;
-
-  const cy =
-    rect.top +
-    rect.height / 2;
-
-
-  return Math.hypot(
-    clientX - cx,
-    clientY - cy
-  );
-
-}
-
-
-document.addEventListener(
-  'mousemove',
-  (e) => {
-
-    if(
-      !document
-        .getElementById('scene-reveal')
-        .classList
-        .contains('active')
-    ){
-      return;
-    }
-
-
-    if(
-      distToBtn(
-        e.clientX,
-        e.clientY
-      ) < 110
-    ){
-
-      dodge();
-
-    }
-
-  }
-);
-
-
-noBtn.addEventListener(
-  'touchstart',
-  function(e){
-
-    e.preventDefault();
-
-    dodge();
-
-  },
-  {passive:false}
-);
-
-
-noBtn.addEventListener(
-  'click',
-  function(e){
-
-    e.preventDefault();
-
-    e.stopPropagation();
-
-    dodge();
-
-  }
-);
 
 </script>
 
