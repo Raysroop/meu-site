@@ -743,4 +743,50 @@ function finishQuiz(){
   }
 }
 
-/* BOTÃO "DEI
+/* BOTÃO "DEIXA EU PENSAR" — FOGE */
+const noBtn = document.getElementById('btn-no');
+const btnRow = noBtn.parentElement;
+let dodges = 0;
+let noPos = {x:0, y:0};
+
+noBtn.style.position = 'relative';
+noBtn.style.left = '0px';
+noBtn.style.top = '0px';
+
+function randomDodgeTarget(){
+  const margin = 20;
+  const w = noBtn.offsetWidth;
+  const spanX = Math.max(window.innerWidth - w - margin*2, 200);
+  const spanY = Math.max(window.innerHeight * 0.5, 160);
+  const targetX = (Math.random() - 0.5) * spanX;
+  const targetY = (Math.random() - 0.5) * spanY;
+  return {x: targetX, y: targetY};
+}
+
+function dodge(){
+  noPos = randomDodgeTarget();
+  noBtn.style.transform = `translate(${noPos.x}px, ${noPos.y}px)`;
+  dodges++;
+  if(dodges === 3){ noBtn.textContent = "para de tentar"; }
+  else if(dodges === 8){ noBtn.textContent = "sério, desiste"; }
+  else if(dodges > 14){ noBtn.textContent = "😤"; }
+}
+
+function distToBtn(clientX, clientY){
+  const rect = noBtn.getBoundingClientRect();
+  const cx = rect.left + rect.width/2;
+  const cy = rect.top + rect.height/2;
+  return Math.hypot(clientX - cx, clientY - cy);
+}
+
+document.addEventListener('mousemove', (e) => {
+  if(!document.getElementById('scene-reveal').classList.contains('active')) return;
+  if(distToBtn(e.clientX, e.clientY) < 110){ dodge(); }
+});
+
+noBtn.addEventListener('touchstart', function(e){ e.preventDefault(); dodge(); }, {passive:false});
+noBtn.addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation(); dodge(); });
+</script>
+
+</body>
+</html>
